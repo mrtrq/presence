@@ -1,26 +1,79 @@
 @import "tailwindcss";
+@import "tailwindcss/preflight"
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@tailwind base;
+@tailwind utilities;
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+html{
+  scroll-behavior: smooth;
+}
+
+
+/* --- Theme tokens (Swiss-ish) --- */
+@theme {
+--font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+--color-bg: #ffffff;
+--color-fg: #111111;
+--color-muted: #6b7280; /* gray-500 */
+--color-accent: #e10600; /* a precise, assertive red */
+
+
+--space-1: 4px; /* baseline */
+--space-2: 8px;
+--space-3: 12px;
+--space-4: 16px;
+--space-6: 24px;
+--space-8: 32px;
+--space-12: 48px;
+--space-16: 64px;
+
+
+--container: 1200px; /* generous but not full-bleed */
+}
+
+
+/* Base reset + typescale leaning Swiss */
+:root { scroll-behavior: smooth; }
+html, body { height: 100%; }
+body { @apply bg-[--color-bg] text-[--color-fg] font-sans antialiased; }
+
+
+/***** Typographic rhythm *****/
+h1 { @apply text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em]; }
+h2 { @apply text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] tracking-[-0.01em]; }
+h3 { @apply text-[1.25rem] font-semibold leading-tight; }
+p { @apply leading-relaxed; }
+
+
+/* Container + grid helpers */
+.container-swiss { max-width: var(--container); margin-inline: auto; padding-inline: var(--space-8); }
+.grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-8); }
+.baseline { line-height: calc(4px * 6); }
+
+
+/* Links */
+a { @apply underline underline-offset-4 decoration-[--color-fg]; }
+a:hover { @apply decoration-[--color-accent]; }
+
+
+/* Buttons (rectilinear, bold) */
+.btn { @apply inline-flex items-center gap-2 border border-[--color-fg] px-5 py-3 text-sm uppercase tracking-widest; }
+.btn:hover { @apply bg-black text-white -translate-y-[2px] transition-transform; }
+
+/* Section framing with assertive rules */
+.section { @apply py-24 md:py-32 border-t border-[--color-fg]; }
+.section:first-child { border-top: 0; }
+
+
+/* Header sticks, with a thin rule */
+.header { @apply sticky top-0 z-50 bg-[--color-bg]/90 backdrop-blur border-b border-[--color-fg]; }
+.nav a { @apply no-underline uppercase text-xs tracking-[0.2em]; }
+.nav a:hover { @apply text-[--color-accent]; }
+
+
+/* Footnote style */
+.small { @apply text-xs text-[--color-muted]; }
