@@ -96,7 +96,7 @@ export default function Page() {
       {/* Contact */}
       <Section id="contact" title="Contact" kicker="Get in touch">
         <p className="mb-2">Open to discussions, collaborations, and experiments.</p>
-        <p className="text-2xl font-bold">tarreq.maulana {"{at}"} gmail.com</p>
+        <p className="text-xl font-bold">tarreq.maulana {"{at}"} gmail.com</p>
       </Section>
     </>
   );

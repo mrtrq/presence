@@ -77,3 +77,9 @@ a:hover { @apply decoration-[--color-accent]; }
 
 /* Footnote style */
 .small { @apply text-xs text-[--color-muted]; }
+
+.grid-12 { 
+  display: grid; 
+  grid-template-columns: repeat(12, minmax(0, 1fr)); 
+  gap: var(--safe-gap);
+}
