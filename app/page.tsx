@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Section } from "./components/Section";
 import { ProjectCard } from "./components/ProjectCard";
+import { NewProjectCard } from "./components/NewProjectCard";
 import { ExternalLink } from "lucide-react";
 
 
@@ -15,8 +16,7 @@ export default function Page() {
               Navigating Through
             </h1>
             <p className="max-w-[60ch] text-lg text-[--color-muted] mb-8">
-               {/* I studied computer science at Universitas Indonesia. I believe that challenges should be translated into possibilities. In the realm of uncertainties, I can be the navigator.  */}
-               I studied computer science at Universitas Indonesia. I believe that challenges should be translated into possibilities. I also enjoy navigating through the uncertainties
+               I studied computer science at Universitas Indonesia. I believe that challenges should be translated into possibilities. I am learning to navigate through the uncertainties
             </p>
             <div className="flex gap-4">
               <a className="btn" href="#work">View Work</a>
@@ -45,13 +45,14 @@ export default function Page() {
       <Section id="work" title="Selected Work" kicker="Projects">
         <div className="grid md:grid-cols-3 gap-6">
           {/* research */}
-          <ProjectCard title="Project 1" desc="description" href="#" /> 
+          <NewProjectCard topic="Campus" title="Thesis Research" preview="We built a multi‑scenario pipeline comparing super‑resolution methods (bicubic, SRCNN) and feature sets from spectral indices to predict water quality parameters (TSS, TDS, and DO) from Sentinel‑2 imagery for Jakarta’s rivers." viewtype="slide" href="https://drive.google.com/file/d/1f0mQ08DmmCkrgantM24Aau_bQzDZN7Uo/view?usp=drive_link" /> 
           {/* project from competition */}
-          <ProjectCard title="Project 2 (proreve)" desc="description" href="#" />
+          <NewProjectCard topic="Competition" title="L'Oreal Proreve" desc="We submit an idea to pair a hair stylist’s tool with a mobile app to ensure accurate shade matching for color‑blind clients. We built the app protoype to demonstrate the flows and features." viewtype="prototype" href="https://www.figma.com/proto/mBzgjzKw9M1w1pnWoeM4pm/Brainstorm?node-id=8-627&p=f&t=PuvC8o6ToOqNFInw-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1" />
           {/* student organization */}
-          <ProjectCard title="Project 3 (bem fasilkomui)" desc="description" href="#" />
+          <NewProjectCard topic="Organization" title="BEM Fasilkom UI" desc="We extend the importance of student wellbeing, advocacy, and collaborative systems to create everyday campus life easier, fairer, and more connected." viewtype="grand design" href="https://drive.google.com/file/d/1yhmhCl2-L0ZD8DY8aUZ60iO9hrP0uPgm/view?usp=sharing" />
         </div>
       </Section>
+
 
       {/* Writing */}
       <Section id="writing" title="Writing" kicker="Notes">
@@ -94,8 +95,8 @@ export default function Page() {
 
       {/* Contact */}
       <Section id="contact" title="Contact" kicker="Get in touch">
-        <p className="mb-6">Open to discussions, collaborations, and experiments.</p>
-        <a className="btn" href="mailto:tarreq.maulana@gmail.com">Mail me</a>
+        <p className="mb-2">Open to discussions, collaborations, and experiments.</p>
+        <p className="text-2xl font-bold">tarreq.maulana {"{at}"} gmail.com</p>
       </Section>
     </>
   );
