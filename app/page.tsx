@@ -19,7 +19,7 @@ export default function Page() {
                My name is Muhammad Tarreq. I studied at Universitas Indonesia, majoring in computer science 💻. I believe that challenges should be translated into possibilities.
             </p>
             <div className="flex gap-4">
-              <a className="btn" href="#work">View Work</a>
+              <a className="btn" href="#projects">View Work</a>
               <a className="btn" href="#contact">Contact</a>
             </div>
           </div>
@@ -42,7 +42,7 @@ export default function Page() {
       </Section>
 
       {/* Work */}
-      <Section id="work" title="Selected Work" kicker="Projects">
+      <Section id="projects" title="Selected Work" kicker="Projects">
         <div className="grid md:grid-cols-3 gap-6">
           {/* research */}
           <NewProjectCard topic="Campus" title="Thesis Research" preview="We built a multi‑scenario pipeline comparing super‑resolution methods (bicubic, SRCNN) and feature sets from spectral indices to predict water quality parameters (TSS, TDS, and DO) from Sentinel‑2 imagery for Jakarta’s rivers." viewtype="slide" href="https://drive.google.com/file/d/1f0mQ08DmmCkrgantM24Aau_bQzDZN7Uo/view?usp=drive_link" /> 
