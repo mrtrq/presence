@@ -15,8 +15,8 @@ export default function Page() {
             <h1 className="mb-6">
               Navigating Through
             </h1>
-            <p className="max-w-[60ch] text-lg text-[--color-muted] mb-8">
-               I studied computer science at Universitas Indonesia. I believe that challenges should be translated into possibilities. I am learning to navigate through the uncertainties
+            <p className="max-w-[60ch] text-lg text-[--color-muted] mb-8 text-left">
+               My name is Muhammad Tarreq. I studied at Universitas Indonesia, majoring in computer science 💻. I believe that challenges should be translated into possibilities.
             </p>
             <div className="flex gap-4">
               <a className="btn" href="#work">View Work</a>
@@ -24,7 +24,7 @@ export default function Page() {
             </div>
           </div>
           <div className="col-span-12 md:col-span-5 mt-10 md:mt-0">
-            <Image src="/avatar.jpg" alt="Tarreq portrait" width={640} height={800} className="w-full h-auto border border-[--color-fg]" />
+            <Image src="/avatar.jpg" alt="Tarreq's portrait" width={640} height={800} className="w-full h-auto border border-[--color-fg]" />
           </div>
         </div>
       </section>
@@ -36,7 +36,7 @@ export default function Page() {
             I find fulfillment in making someone's day easier and better. Sometimes it can be done through products and technology, and often times it's through communities and student organizations.
           </p>
           <p>
-            Pak Karim Siregar once told me that learning is one thing, but unlearning is the thing that most cannot do. This is a message that I want to remember closely
+            I’m excited to continue the pursuit of making this world a better place, with approaches that rekindle the light in every challenge.
           </p>
         </div>
       </Section>
@@ -95,7 +95,7 @@ export default function Page() {
 
       {/* Contact */}
       <Section id="contact" title="Contact" kicker="Get in touch">
-        <p className="mb-2">Open to discussions, collaborations, and experiments.</p>
+        <p className="mb-2">I'm all ears for discussions, collaborations, and experiments.</p>
         <p className="text-xl font-bold">tarreq.maulana {"{at}"} gmail.com</p>
       </Section>
     </>
