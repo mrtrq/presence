@@ -70,6 +70,17 @@ export default function Page() {
           </li>
           <li>
             <a
+              href="https://medium.com/@tarreq.maulana/refactor-a-forge-to-the-structure-4b5911753f43"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 hover:underline"
+            >
+              Refactor: A Forge to The Structure
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </li>
+          <li>
+            <a
               href="https://medium.com/@tarreq.maulana/market-research-guest-lecture-836a52c66510"
               target="_blank"
               rel="noopener noreferrer"
