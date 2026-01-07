@@ -3,6 +3,7 @@ import { Section } from "./components/Section";
 import { ProjectCard } from "./components/ProjectCard";
 import { NewProjectCard } from "./components/NewProjectCard";
 import { ExternalLink } from "lucide-react";
+import { WebsiteCard } from "./components/WebsiteCard";
 
 
 export default function Page() {
@@ -16,7 +17,7 @@ export default function Page() {
               Navigating Through
             </h1>
             <p className="max-w-[60ch] text-lg text-[--color-muted] mb-8 text-left">
-               My name is Muhammad Tarreq. I studied at Universitas Indonesia, majoring in computer science 💻. I believe that challenges should be translated into possibilities.
+               My name is Muhammad Tarreq. I have graduated from Universitas Indonesia, majoring in computer science 💻. I believe that challenges should be translated into possibilities.
             </p>
             <div className="flex gap-4">
               <a className="btn" href="#projects">View Works</a>
@@ -53,6 +54,13 @@ export default function Page() {
         </div>
       </Section>
 
+      {/* Extras */}
+      <Section id="projects" title="Extras" kicker="Projects">
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* Book Listing Imakata */}
+          <WebsiteCard topic="Book Listing" title="Imakata Library" desc="List of books available at Imakata Libary" href="https://imakata.netlify.app/" image="/imakata.jpg" imageAlt="Website screenshot"></WebsiteCard>
+        </div>
+      </Section>
 
       {/* Writing */}
       <Section id="writing" title="Writing" kicker="Notes">
