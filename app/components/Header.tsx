@@ -3,7 +3,7 @@ const links = [
 { href: "#home", label: "Home" },
 { href: "#about", label: "About" },
 { href: "#projects", label: "Projects" },
-{ href: "#writing", label: "Writing" },
+{ href: "#writing", label: "Writings" },
 { href: "#contact", label: "Contact" },
 ];
 return (

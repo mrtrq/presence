@@ -17,7 +17,7 @@ export function Navbar() {
         <div className="hidden md:flex space-x-8 text-sm font-medium">
           <Link href="#about" className="hover:text-blue-600 transition">About</Link>
           <Link href="#projects" className="hover:text-blue-600 transition">Projects</Link>
-          <Link href="#writing" className="hover:text-blue-600 transition">Writing</Link>
+          <Link href="#writing" className="hover:text-blue-600 transition">Writings</Link>
           <Link href="#contact" className="hover:text-blue-600 transition">Contact</Link>
         </div>
 
@@ -41,7 +41,7 @@ export function Navbar() {
           <div className="flex flex-col px-6 py-4 space-y-4 text-sm font-medium">
             <Link href="#about" onClick={() => setOpen(false)}>About</Link>
             <Link href="#projects" onClick={() => setOpen(false)}>Projects</Link>
-            <Link href="#writing" onClick={() => setOpen(false)}>Writing</Link>
+            <Link href="#writing" onClick={() => setOpen(false)}>Writings</Link>
             <Link href="#contact" onClick={() => setOpen(false)}>Contact</Link>
           </div>
         </div>
