@@ -59,7 +59,10 @@ export default function Page() {
 
         <div className="grid md:grid-cols-3 gap-6">
 
-          {/* Book Listing Imakata */}
+          {/* Nitip Doa */}
+          <WebsiteCard topic="Initiative" title="Nitip Doa" desc="Send your du'a, someone will read it at Mecca / Medina" href="https://nitipdoa.com/" image="/nitip doa.png" imageAlt="Website screenshot"></WebsiteCard>
+
+          {/* Bali-blueprint */}
           <WebsiteCard topic="Portfolio Page" title="Bali Blueprint" desc="Portfolio page for architecture studio" href="https://bali-blueprint.com/" image="/bali-blueprint.jpeg" imageAlt="Website screenshot"></WebsiteCard>
 
           {/* Book Listing Imakata */}
