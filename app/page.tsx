@@ -55,15 +55,20 @@ export default function Page() {
       </Section>
 
       {/* Extras */}
-      <Section id="projects" title="Extras" kicker="Projects">
+      <Section id="projects" title="Websites" kicker="Projects">
+
         <div className="grid md:grid-cols-3 gap-6">
+
+          {/* Book Listing Imakata */}
+          <WebsiteCard topic="Portfolio Page" title="Bali Blueprint" desc="Portfolio page for architecture studio" href="https://bali-blueprint.com/" image="/bali-blueprint.jpeg" imageAlt="Website screenshot"></WebsiteCard>
+
           {/* Book Listing Imakata */}
           <WebsiteCard topic="Book Listing" title="Imakata Library" desc="List of books available at Imakata Libary" href="https://imakata.netlify.app/" image="/imakata.jpg" imageAlt="Website screenshot"></WebsiteCard>
         </div>
       </Section>
 
       {/* Writing */}
-      <Section id="writing" title="Writing" kicker="Notes">
+      <Section id="writing" title="Writings" kicker="Notes">
         <ul className="list-disc pl-6 space-y-2">
           <li>
             <a
