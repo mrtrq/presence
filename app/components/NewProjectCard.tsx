@@ -1,4 +1,5 @@
 "use client";
+import { ExternalLink, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -54,11 +55,10 @@ export function NewProjectCard({
           e.preventDefault();
           setOpen(true);
         }}
-        style={{ textDecoration: "none" }}
-        className="group block border border-[--color-fg] p-6 hover:bg-black hover:text-white hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-black transition-colors"
+        className="glass-card group block p-6 no-underline md:p-7"
       >
-        <div className="uppercase text-xs tracking-[0.2em] mb-2">{topic}</div>
-        <h3 className="mb-1 underline underline-offset-4 decoration-1">{title}</h3>
+        <div className="card-kicker mb-3">{topic}</div>
+        <h3 className="mb-1 underline decoration-1 group-hover:decoration-[#28b9ff]">{title}</h3>
         {/* <p className="text-sm text-balance">{desc}</p> */}
       </a>
 
@@ -68,51 +68,46 @@ export function NewProjectCard({
           role="dialog"
           aria-modal="true"
           aria-labelledby="project-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4"
         >
           {/* Backdrop */}
           <button
             aria-label="Close"
-            className="absolute inset-0 bg-black/50"
+            className="modal-backdrop"
             onClick={() => setOpen(false)}
           />
 
           {/* Panel */}
-          <div className="relative max-w-2xl w-[92vw] rounded-2xl bg-white text-black shadow-2xl border border-black/10">
+          <div className="glass-modal">
             <div className="p-6 sm:p-8">
-              <div className="uppercase text-xs tracking-[0.2em] mb-2 text-neutral-600">
+              <div className="card-kicker mb-2">
                 {topic}
               </div>
               <h2 id="project-modal-title" className="text-2xl font-medium mb-3">
                 {title}
               </h2>
-              <p className="text-base leading-relaxed text-neutral-800">
+              <p className="card-muted text-base leading-relaxed">
                 {preview || desc}
               </p>
 
               {/* Actions */}
-              <div className="mt-6 flex items-center gap-3">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a
                   href={href}
-                  style={{textDecoration: 'none'}}
-                  className="inline-flex items-center gap-2 rounded-xl border border-black px-4 py-2 hover:bg-black hover:text-white transition-colors"
+                  className="modal-action modal-action-primary"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   View {viewtype}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-4 w-4"
-                  >
-                    <path d="M13 5h6v6h-2V8.41l-9.29 9.3-1.42-1.42 9.3-9.29H13V5Z" />
-                  </svg>
+                  <ExternalLink aria-hidden="true" size={16} />
                 </a>
                 <button
                   ref={closeButtonRef}
                   onClick={() => setOpen(false)}
-                  className="rounded-xl border border-black px-4 py-2 hover:bg-neutral-100"
+                  className="modal-action"
+                  type="button"
                 >
+                  <X aria-hidden="true" size={16} />
                   Close
                 </button>
               </div>

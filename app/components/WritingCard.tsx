@@ -14,18 +14,17 @@ export function WritingCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ textDecoration: "none" }}
-      className="group flex items-start justify-between gap-6 py-5 hover:opacity-60 transition-opacity"
+      className="writing-row group"
     >
       <div className="min-w-0">
-        <h3 className="text-base font-medium leading-snug mb-2 group-hover:underline underline-offset-4">
+        <h3 className="mb-2 text-base font-medium leading-snug group-hover:underline">
           {title}
         </h3>
-        <p className="text-sm text-[--color-muted] leading-relaxed">
+        <p className="card-muted text-sm leading-relaxed">
           {excerpt}
         </p>
       </div>
-      <ExternalLink className="w-4 h-4 shrink-0 mt-1 opacity-40 group-hover:opacity-100 transition-opacity" />
+      <ExternalLink className="mt-1 h-4 w-4 shrink-0 opacity-45 transition-opacity group-hover:opacity-100" />
     </a>
   );
 }

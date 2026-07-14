@@ -30,8 +30,7 @@ export function WebsiteCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ textDecoration: "none" }}
-      className="group block border border-[--color-fg] overflow-hidden hover:bg-black hover:text-white hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-black transition-all duration-200"
+      className="glass-card group block overflow-hidden no-underline"
     >
       {/* Optional preview image */}
       {image && (
@@ -41,22 +40,22 @@ export function WebsiteCard({
             alt={imageAlt || title}
             width={800}
             height={450}
-            className="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
           />
         </div>
       )}
 
       {/* Content */}
       <div className="p-6">
-        <div className="uppercase text-xs tracking-[0.2em] mb-2">{topic}</div>
+        <div className="card-kicker mb-3">{topic}</div>
         <div className="flex items-start justify-between gap-3">
-          <h3 className="mb-1 underline underline-offset-4 decoration-1 group-hover:decoration-white flex-1">
+          <h3 className="mb-1 flex-1 underline decoration-1 group-hover:decoration-[#28b9ff]">
             {title}
           </h3>
-          <ExternalLink className="h-4 w-4 shrink-0 mt-1 opacity-60 group-hover:opacity-100 transition-opacity" />
+          <ExternalLink className="mt-1 h-4 w-4 shrink-0 opacity-55 transition-opacity group-hover:opacity-100" />
         </div>
         {desc && (
-          <p className="text-sm text-balance mt-2 leading-relaxed">{desc}</p>
+          <p className="card-muted mt-2 text-sm leading-relaxed text-balance">{desc}</p>
         )}
       </div>
     </a>

@@ -1,57 +1,62 @@
 "use client";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const links = [
+    { href: "/#about", label: "About" },
+    { href: "/#projects", label: "Works" },
+    { href: "/#websites", label: "Websites" },
+    { href: "/#writing", label: "Writing" },
+    { href: "/#contact", label: "Contact" },
+  ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white border-b border-[--color-fg] z-50">
-      <div className="container-swiss flex justify-between items-center h-16">
-        {/* Name */}
-        <Link
-          href="/"
-          style={{ textDecoration: "none" }}
-          className="text-base font-semibold tracking-tight uppercase"
-        >
-          Tarreq.
-        </Link>
+    <nav className="nav-wrap">
+      <div className="container-swiss">
+        <div className="nav-shell flex items-center justify-between gap-4 px-4 sm:px-5">
+          <Link href="/" className="nav-brand">
+            Tarreq.
+          </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8 text-xs font-medium uppercase tracking-[0.2em]">
-          <Link href="#about" style={{ textDecoration: "none" }} className="hover:text-[#e10600] transition-colors">About</Link>
-          {/* <Link href="#now"   style={{ textDecoration: "none" }} className="hover:text-[#e10600] transition-colors">Now</Link> */}
-          <Link href="#projects" style={{ textDecoration: "none" }} className="hover:text-[#e10600] transition-colors">Works</Link>
-          <Link href="#writing" style={{ textDecoration: "none" }} className="hover:text-[#e10600] transition-colors">Writing</Link>
-          <Link href="#contact" style={{ textDecoration: "none" }} className="hover:text-[#e10600] transition-colors">Contact</Link>
+          <div className="hidden items-center gap-6 md:flex">
+            {links.map((link) => (
+              <Link key={link.href} href={link.href} className="nav-link">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setOpen((value) => !value)}
+            className="nav-toggle md:hidden"
+            aria-expanded={open}
+            aria-label="Toggle menu"
+            type="button"
+          >
+            {open ? <X aria-hidden="true" size={20} /> : <Menu aria-hidden="true" size={20} />}
+          </button>
         </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden flex items-center focus:outline-none"
-          aria-label="Toggle menu"
-        >
-          <div className="space-y-1">
-            <div className="w-6 h-0.5 bg-black"></div>
-            <div className="w-6 h-0.5 bg-black"></div>
-            <div className="w-6 h-0.5 bg-black"></div>
+        {open && (
+          <div className="mobile-nav-panel md:hidden">
+            <div className="flex flex-col gap-1 p-2">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="nav-link rounded-[8px] px-3 py-4"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
-        </button>
+        )}
       </div>
-
-      {/* Mobile Dropdown */}
-      {open && (
-        <div className="md:hidden bg-white border-t border-[--color-fg]">
-          <div className="container-swiss flex flex-col py-5 space-y-4 text-xs font-medium uppercase tracking-[0.2em]">
-            <Link href="#about"    style={{ textDecoration: "none" }} onClick={() => setOpen(false)}>About</Link>
-            {/* <Link href="#now"      style={{ textDecoration: "none" }} onClick={() => setOpen(false)}>Now</Link> */}
-            <Link href="#projects" style={{ textDecoration: "none" }} onClick={() => setOpen(false)}>Works</Link>
-            <Link href="#writing"  style={{ textDecoration: "none" }} onClick={() => setOpen(false)}>Writing</Link>
-            <Link href="#contact"  style={{ textDecoration: "none" }} onClick={() => setOpen(false)}>Contact</Link>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }

@@ -2,11 +2,11 @@ export function Section({ id, title, kicker, children }: { id: string; title: st
   return (
     <section id={id} className="section">
       <div className="container-swiss grid-12">
-        <header className="col-span-12 md:col-span-4">
-          {kicker ? <div className="small uppercase tracking-[0.25em] mb-2">{kicker}</div> : null}
+        <header className="section-header col-span-12 md:col-span-4">
+          {kicker ? <div className="small mb-2">{kicker}</div> : null}
           <div className="mb-4">
             <h2>{title}</h2>
-            </div>
+          </div>
         </header>
         <div className="col-span-12 md:col-span-8">
           {children}

@@ -2,17 +2,16 @@ import Link from 'next/link';
 
 export default function BlogPage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
-      <h1 className="text-4xl font-bold mb-4 text-orange-500">✍️ Blog</h1>
-      <p className="text-xl text-gray-600 mb-8">
-        Writing is in progress. Check back soon for new articles!
-      </p>
-      <Link 
-        href="/" 
-        className="px-6 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition"
-      >
-        Go Home
-      </Link>
+    <div className="container-swiss flex min-h-screen items-center justify-center pt-28 text-center">
+      <div className="glass-card max-w-lg p-8">
+        <h1 className="mb-4 text-4xl font-bold">✍️ Blog</h1>
+        <p className="card-muted mb-8 text-xl">
+          Writing is in progress. Check back soon for new articles!
+        </p>
+        <Link href="/" className="btn">
+          Go Home
+        </Link>
+      </div>
     </div>
   );
 }

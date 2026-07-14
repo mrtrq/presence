@@ -10,28 +10,30 @@ export default function Page() {
   return (
     <>
       {/* Hero */}
-      <section id="home" className="py-28 md:py-40">
+      <section id="home" className="hero-section pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="container-swiss grid-12 items-center">
-          <div className="col-span-12 md:col-span-7">
-            <h1 className="mb-6">
-              Navigating Through
+          <div className="hero-copy col-span-12 md:col-span-7">
+            <h1 className="hero-title">
+              <span>Navigating</span>
+              <span>Through</span>
             </h1>
-            <p className="max-w-[60ch] text-lg text-[--color-muted] mb-8 text-left">
+            <p className="hero-lede mb-8 text-left">
               My name is Muhammad Tarreq. I am navigating the uncertainties through the process of learning and unlearning.
               Still redescovering myself in my early 20s in order to have a fulfilling life ahead.
             </p>
-            <div className="flex gap-4">
+            <div className="hero-actions flex flex-col gap-3 sm:flex-row sm:gap-4">
               <a className="btn" href="#projects">See What&apos;s New</a>
               <a className="btn" href="#contact">Contact</a>
             </div>
           </div>
-          <div className="col-span-12 md:col-span-5 mt-10 md:mt-0">
+          <div className="hero-media col-span-12 mt-10 md:col-span-5 md:mt-0">
             <Image
               src="/avatar.jpg"
               alt="Tarreq's portrait"
               width={640}
               height={800}
-              className="w-full h-auto border border-[--color-fg]"
+              priority
+              className="h-auto w-full"
             />
           </div>
         </div>
@@ -39,7 +41,7 @@ export default function Page() {
 
       {/* About */}
       <Section id="about" title="About" kicker="Profile">
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
           <p>
             I find fulfillment in making someone's day easier and better. Sometimes it can be done through products and technology, and often times it's through communities and student organizations.
           </p>
@@ -111,7 +113,7 @@ export default function Page() {
 
       {/* Writing */}
       <Section id="writing" title="Writings" kicker="Notes">
-        <div className="border-t border-[--color-fg] divide-y divide-[--color-fg]">
+        <div className="writing-list">
           <WritingCard
             title="Live Your Life at Full Power"
             excerpt="On operating at full capacity — not just in work, but in presence, attention, and the everyday moments that compound into a life."
@@ -138,7 +140,7 @@ export default function Page() {
       {/* Contact */}
       <Section id="contact" title="Contact" kicker="Get in touch">
         <p className="mb-2">I&apos;m all ears for discussions, collaborations, and experiments.</p>
-        <p className="text-xl font-bold">tarreq.maulana {"{at}"} gmail.com</p>
+        <p className="contact-email text-xl font-bold">tarreq.maulana {"{at}"} gmail.com</p>
       </Section>
     </>
   );
