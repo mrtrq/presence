@@ -2,14 +2,27 @@ import Link from 'next/link';
 
 export default function BlogPage() {
   return (
-    <div className="container-swiss flex min-h-screen items-center justify-center pt-28 text-center">
-      <div className="glass-card max-w-lg p-8">
-        <h1 className="mb-4 text-4xl font-bold">✍️ Blog</h1>
-        <p className="card-muted mb-8 text-xl">
-          Writing is in progress. Check back soon for new articles!
+    <div className="container-swiss blog-list-shell">
+      <div className="blog-list-header">
+        <Link href="/" className="article-back">
+          Back home
+        </Link>
+        <p className="article-kicker">Blog</p>
+        <h1>Notes and visual investigations</h1>
+        <p>
+          A place for writing that benefits from being interactive, visual, or a little more
+          exploratory than a static note.
         </p>
-        <Link href="/" className="btn">
-          Go Home
+      </div>
+
+      <div className="blog-card-list">
+        <Link href="/blog/exoplanet-atlas" className="blog-card glass-card">
+          <p className="card-kicker">D3.js data story</p>
+          <h2>What kind of exoplanets did we learn to see?</h2>
+          <p>
+            NASA Exoplanet Archive data visualized with D3: discovery waves, detection methods,
+            and an interactive map of planet radius against host-star temperature.
+          </p>
         </Link>
       </div>
     </div>
