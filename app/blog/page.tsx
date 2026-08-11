@@ -24,6 +24,14 @@ export default function BlogPage() {
             and an interactive map of planet radius against host-star temperature.
           </p>
         </Link>
+        <Link href="/blog/exoplanet-kepler-story" className="blog-card glass-card">
+          <p className="card-kicker">Data story</p>
+          <h2>How Kepler Changed Our View of Small Worlds</h2>
+          <p>
+            A data story on how Kepler turned small planets from rare detections into a measurable
+            population, with era comparisons, method mix, and radius-band visualizations.
+          </p>
+        </Link>
       </div>
     </div>
   );
