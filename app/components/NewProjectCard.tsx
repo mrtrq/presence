@@ -59,7 +59,9 @@ export function NewProjectCard({
       >
         <div className="card-kicker mb-3">{topic}</div>
         <h3 className="mb-1 underline decoration-1 group-hover:decoration-[#28b9ff]">{title}</h3>
-        {/* <p className="text-sm text-balance">{desc}</p> */}
+        <p className="card-muted project-card-summary text-sm text-balance">
+          {desc || preview}
+        </p>
       </a>
 
       {/* Modal */}

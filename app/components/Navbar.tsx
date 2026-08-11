@@ -1,61 +1,84 @@
 "use client";
-import { Menu, X } from "lucide-react";
+
+import {
+  BriefcaseBusiness,
+  Globe2,
+  Mail,
+  NotebookPen,
+  UserRound,
+} from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const links = [
+  { id: "about", label: "About", icon: UserRound },
+  { id: "works", label: "Works", icon: BriefcaseBusiness },
+  { id: "websites", label: "Websites", icon: Globe2 },
+  { id: "writing", label: "Writing", icon: NotebookPen },
+  { id: "contact", label: "Contact", icon: Mail },
+] as const;
+
+type SectionId = (typeof links)[number]["id"];
+
+function sectionFromHash(hash: string): SectionId {
+  const value = hash.replace("#", "");
+  if (value === "projects") return "works";
+  return links.some((link) => link.id === value) ? (value as SectionId) : "about";
+}
 
 export function Navbar() {
-  const [open, setOpen] = useState(false);
-  const links = [
-    { href: "/#about", label: "About" },
-    { href: "/#projects", label: "Works" },
-    { href: "/#websites", label: "Websites" },
-    { href: "/#writing", label: "Writing" },
-    { href: "/#contact", label: "Contact" },
-  ];
+  const pathname = usePathname();
+  const [active, setActive] = useState<SectionId>("about");
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const syncFromUrl = () => setActive(sectionFromHash(window.location.hash));
+    const syncFromPage = (event: Event) => {
+      const next = (event as CustomEvent<{ section: SectionId }>).detail?.section;
+      if (next) setActive(next);
+    };
+
+    syncFromUrl();
+    window.addEventListener("hashchange", syncFromUrl);
+    window.addEventListener("popstate", syncFromUrl);
+    window.addEventListener("portfolio:changed", syncFromPage);
+
+    return () => {
+      window.removeEventListener("hashchange", syncFromUrl);
+      window.removeEventListener("popstate", syncFromUrl);
+      window.removeEventListener("portfolio:changed", syncFromPage);
+    };
+  }, [pathname]);
+
+  const navigate = (event: React.MouseEvent<HTMLAnchorElement>, section: SectionId) => {
+    if (pathname !== "/") return;
+    event.preventDefault();
+    window.dispatchEvent(new CustomEvent("portfolio:navigate", { detail: { section } }));
+  };
 
   return (
-    <nav className="nav-wrap">
-      <div className="container-swiss">
-        <div className="nav-shell flex items-center justify-between gap-4 px-4 sm:px-5">
-          <Link href="/" className="nav-brand">
-            Tarreq.
-          </Link>
+    <nav className="nav-wrap" aria-label="Portfolio sections">
+      <div className="dock-shell">
+        {links.map(({ id, label, icon: Icon }) => {
+          const isActive = pathname === "/" && active === id;
 
-          <div className="hidden items-center gap-6 md:flex">
-            {links.map((link) => (
-              <Link key={link.href} href={link.href} className="nav-link">
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          <button
-            onClick={() => setOpen((value) => !value)}
-            className="nav-toggle md:hidden"
-            aria-expanded={open}
-            aria-label="Toggle menu"
-            type="button"
-          >
-            {open ? <X aria-hidden="true" size={20} /> : <Menu aria-hidden="true" size={20} />}
-          </button>
-        </div>
-
-        {open && (
-          <div className="mobile-nav-panel md:hidden">
-            <div className="flex flex-col gap-1 p-2">
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="nav-link rounded-[8px] px-3 py-4"
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+          return (
+            <Link
+              key={id}
+              href={`/#${id}`}
+              className={`dock-link${isActive ? " is-active" : ""}`}
+              aria-current={isActive ? "page" : undefined}
+              onClick={(event) => navigate(event, id)}
+            >
+              <span className="dock-icon" aria-hidden="true">
+                <Icon size={18} strokeWidth={1.9} />
+              </span>
+              <span className="dock-label">{label}</span>
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );
