@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDownRight, ArrowUpRight, Github, Mail } from "lucide-react";
+import { ArrowRight, Check, Copy, Github } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { NewProjectCard } from "./components/NewProjectCard";
@@ -27,7 +27,9 @@ function sectionFromHash(hash: string): SectionId {
 export default function Page() {
   const [active, setActive] = useState<SectionId>("about");
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
+  const [copied, setCopied] = useState(false);
   const activeRef = useRef<SectionId>("about");
+  const copyResetRef = useRef<number | null>(null);
 
   const showSection = useCallback((next: SectionId, updateHistory = true) => {
     const currentIndex = sections.indexOf(activeRef.current);
@@ -69,6 +71,38 @@ export default function Page() {
     };
   }, [showSection]);
 
+  useEffect(() => {
+    return () => {
+      if (copyResetRef.current) window.clearTimeout(copyResetRef.current);
+    };
+  }, []);
+
+  const copyEmail = async () => {
+    const email = "tarreq.maulana@gmail.com";
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const field = document.createElement("textarea");
+        field.value = email;
+        field.setAttribute("readonly", "");
+        field.style.position = "fixed";
+        field.style.opacity = "0";
+        document.body.appendChild(field);
+        field.select();
+        document.execCommand("copy");
+        field.remove();
+      }
+
+      setCopied(true);
+      if (copyResetRef.current) window.clearTimeout(copyResetRef.current);
+      copyResetRef.current = window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      setCopied(false);
+    }
+  };
+
   const meta = sectionMeta[active];
 
   return (
@@ -94,27 +128,34 @@ export default function Page() {
           {active === "about" && (
             <div className="about-layout">
               <div className="about-copy">
-                <p className="eyebrow">Hello, I&apos;m Muhammad Tarreq</p>
-                <h1 id="about-title" className="display-title">
-                  Navigating
-                  <span>through.</span>
+                <p className="eyebrow">About me</p>
+                <h1 id="about-title" className="about-title">
+                  Hey, I&apos;m Tarreq<span aria-hidden="true">.</span>
                 </h1>
-                <p className="display-lede">
-                  I learn, unlearn, and make useful things at the intersection of
-                  technology, communities, and everyday life.
-                </p>
+                <div className="about-story">
+                  <p>
+                    I&apos;m a computer science graduate from Universitas Indonesia who is
+                    interested in how technology can make everyday systems and communities
+                    work a little better.
+                  </p>
+                  <p>
+                    My path so far has moved through <span>remote-sensing research</span>,
+                    {" "}<span>digital products</span>, and <span>student-led organizations</span>.
+                    Each has taught me to listen carefully, learn from different people, and
+                    turn uncertain problems into something practical.
+                  </p>
+                  <p>
+                    I&apos;m still navigating what comes next as I learn and unlearn along the way.
+                  </p>
+                </div>
                 <div className="primary-actions">
                   <button className="primary-link" type="button" onClick={() => showSection("works")}>
-                    Explore my work <ArrowDownRight size={18} aria-hidden="true" />
+                    Explore my work <ArrowRight size={18} aria-hidden="true" />
                   </button>
                   <button className="text-link" type="button" onClick={() => showSection("contact")}>
                     Let&apos;s talk
                   </button>
                 </div>
-                <p className="about-note">
-                  I find fulfillment in making someone&apos;s day easier and better —
-                  sometimes through products and technology, often through communities.
-                </p>
               </div>
 
               <figure className="portrait-frame">
@@ -242,19 +283,28 @@ export default function Page() {
               <div className="contact-panel">
                 <p>
                   I&apos;m all ears for thoughtful discussions, collaborations, and experiments.
-                  The easiest way to reach me is by email.
+                  The most convenient way to reach me is by email.
                 </p>
-                <a className="email-link" href="mailto:tarreq.maulana@gmail.com">
-                  <span>tarreq.maulana@gmail.com</span>
-                  <ArrowUpRight aria-hidden="true" />
-                </a>
+                <button
+                  className={`email-link${copied ? " is-copied" : ""}`}
+                  type="button"
+                  onClick={copyEmail}
+                  aria-label="Copy tarreq.maulana@gmail.com"
+                >
+                  <span className="email-address">tarreq.maulana@gmail.com</span>
+                  <span className="email-copy-state" aria-live="polite">
+                    {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
+                    <span>{copied ? "Copied" : "Copy"}</span>
+                  </span>
+                </button>
                 <div className="social-links">
                   <a href="https://github.com/mrtrq" target="_blank" rel="noreferrer">
                     <Github size={17} aria-hidden="true" /> GitHub
                   </a>
-                  <a href="mailto:tarreq.maulana@gmail.com">
-                    <Mail size={17} aria-hidden="true" /> Email
-                  </a>
+                  <button type="button" onClick={copyEmail}>
+                    {copied ? <Check size={17} aria-hidden="true" /> : <Copy size={17} aria-hidden="true" />}
+                    {copied ? "Copied" : "Copy email"}
+                  </button>
                 </div>
               </div>
               <p className="contact-signoff">© {new Date().getFullYear()} Muhammad Tarreq</p>
