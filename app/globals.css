@@ -49,9 +49,10 @@ body {
   color: var(--color-fg);
   font-family: var(--font-sans);
   background:
-    linear-gradient(135deg, var(--sun-soft) 0%, rgba(255, 255, 255, 0) 34%),
+    /* linear-gradient(135deg, var(--sun-soft) 0%, rgba(255, 255, 255, 0) 34%),
     linear-gradient(225deg, var(--sky-soft) 0%, rgba(255, 255, 255, 0) 38%),
-    linear-gradient(180deg, #fbfeff 0%, #eef9ff 46%, #fffdf4 100%);
+    linear-gradient(180deg, #fbfeff 0%, #eef9ff 46%, #fffdf4 100%); */
+    #f6f3ec;
   font-feature-settings: "kern" 1;
   text-rendering: optimizeLegibility;
 }
