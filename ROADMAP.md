@@ -180,16 +180,16 @@ Definition of done: adding a project or article requires editing content data, n
 
 ### Phase 3 — Projects and case studies
 
-Status: planned.
+Status: first case-study foundation complete; media and deeper project detail remain.
 
 - [ ] Build a unified Projects scene with clear type labels or filters.
-- [ ] Create a reusable project-detail template.
+- [x] Create a reusable project-detail template.
 - [ ] Use a consistent story structure: Context → Question → Contribution → Outcome → Reflection.
-- [ ] Convert Remote Sensing into the first internal case study.
-- [ ] Convert BEM Fasilkom UI into a concise leadership/community case study.
+- [x] Convert Remote Sensing into the first internal case study.
+- [x] Convert BEM Fasilkom UI into a concise leadership/community case study.
 - [ ] Decide which websites deserve full stories versus direct links.
 - [ ] Add project media with stable aspect ratios and meaningful alt text.
-- [ ] Keep external decks as secondary evidence, not the only project experience.
+- [x] Keep external decks as secondary evidence, not the only project experience.
 
 Definition of done: a visitor can understand what Tarreq did, why it mattered, and where to learn more without leaving the website.
 

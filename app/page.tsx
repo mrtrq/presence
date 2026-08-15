@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { NewProjectCard } from "./components/NewProjectCard";
 import { WebsiteCard } from "./components/WebsiteCard";
 import { WritingCard } from "./components/WritingCard";
+import { caseStudies } from "./content/projects";
 import { writingEntries } from "./content/writing";
 
 const sections = ["about", "works", "websites", "writing", "contact"] as const;
@@ -182,20 +183,9 @@ export default function Page() {
                 <p>Slices of my research and activities that revolves around people and exploration.</p>
               </header>
               <div className="works-grid">
-                <NewProjectCard
-                  topic="Thesis research"
-                  title="Remote Sensing"
-                  preview="A multi-scenario pipeline comparing super-resolution methods and spectral indices to predict water quality from Sentinel-2 imagery over Jakarta's rivers."
-                  viewtype="slide"
-                  href="https://drive.google.com/file/d/1f0mQ08DmmCkrgantM24Aau_bQzDZN7Uo/view?usp=drive_link"
-                />
-                <NewProjectCard
-                  topic="Organization"
-                  title="BEM Fasilkom UI"
-                  desc="Student governance and advocacy — extending wellbeing systems, collaborative infrastructure, and campus life that works for everyone."
-                  viewtype="grand design"
-                  href="https://drive.google.com/file/d/1yhmhCl2-L0ZD8DY8aUZ60iO9hrP0uPgm/view?usp=sharing"
-                />
+                {caseStudies.map((project) => (
+                  <NewProjectCard key={project.slug} project={project} />
+                ))}
               </div>
             </div>
           )}

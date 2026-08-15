@@ -782,6 +782,68 @@ a {
   text-align: right;
 }
 
+.case-study-hero .eyebrow {
+  margin-bottom: 1.35rem;
+}
+
+.case-study-overview {
+  display: flex;
+  gap: 1.25rem;
+  align-items: end;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--glass-line);
+  padding-block: 1.35rem;
+}
+
+.case-study-overview .article-topic-list {
+  margin-top: 0.55rem;
+}
+
+.case-study-label {
+  color: #087fc0;
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-study-evidence {
+  display: inline-flex;
+  min-height: 42px;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+  align-items: center;
+  border: 1px solid rgba(13, 23, 38, 0.1);
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  color: var(--color-fg);
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+  font-weight: 690;
+  text-decoration: none;
+}
+
+.case-study-body {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--content-reading));
+  margin: clamp(3.5rem, 7vw, 6rem) auto 0;
+}
+
+.case-study-section + .case-study-section {
+  margin-top: clamp(3.25rem, 6vw, 5.5rem);
+}
+
+.case-study-section h2 {
+  max-width: 20ch;
+  margin-top: 0.7rem;
+  font-size: clamp(1.85rem, 3.8vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.case-study-section h2 + p {
+  margin-top: 1.5rem;
+}
+
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1252,6 +1314,19 @@ a {
     min-height: 5.75rem;
   }
 
+  .case-study-overview {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .case-study-body {
+    margin-top: 2.75rem;
+  }
+
+  .case-study-section + .case-study-section {
+    margin-top: 3.25rem;
+  }
+
   .blog-list-shell {
     padding-block: 2rem 7rem;
   }
@@ -1418,6 +1493,8 @@ body:has(.portfolio-page) {
 .archive-filters button:focus-visible,
 .article-copy-link:focus-visible,
 .article-pagination-link:focus-visible,
+.project-case-card:focus-visible,
+.case-study-evidence:focus-visible,
 .social-links a:focus-visible,
 .social-links button:focus-visible {
   outline: 2px solid rgba(40, 185, 255, 0.9);
@@ -1726,6 +1803,31 @@ body:has(.portfolio-page) {
   padding: clamp(1.35rem, 2.3vw, 2rem);
 }
 
+.project-case-card {
+  color: var(--color-fg);
+  text-decoration: none;
+}
+
+.project-case-card h3 {
+  margin-top: 0.45rem;
+}
+
+.project-card-cta {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-top: 1.25rem;
+  color: rgba(13, 23, 38, 0.72);
+  font-size: 0.76rem;
+  font-weight: 720;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.project-case-card:hover .project-card-cta {
+  color: #087fc0;
+  transform: translateX(3px);
+}
+
 .works-grid > .glass-card::after {
   position: absolute;
   top: 1.35rem;
@@ -1838,11 +1940,15 @@ body:has(.portfolio-page) {
 .contact-layout {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(20rem, 1fr) minmax(22rem, 0.8fr);
-  gap: clamp(3rem, 7vw, 6rem);
+  grid-template-columns: minmax(20rem, 0.9fr) minmax(22rem, 0.9fr);
+  gap: clamp(1.5rem, 3.2vw, 3.25rem);
   min-height: 100%;
   align-items: center;
   margin-inline: auto;
+}
+
+.contact-layout > div:first-child {
+  max-width: 35rem;
 }
 
 .contact-layout h1 {

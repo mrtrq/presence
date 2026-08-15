@@ -35,3 +35,7 @@ Before publishing, run:
 ```bash
 npm run build
 ```
+
+## Case-study workflow
+
+Case-study content lives in `app/content/projects.ts`. Each entry controls its homepage card, internal `/projects/[slug]` route, focus tags, supporting deck link, and article sections. Update the `sections` array to add your own context, decisions, outcomes, and reflections without changing the page layout.

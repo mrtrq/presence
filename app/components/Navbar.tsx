@@ -30,7 +30,7 @@ function sectionFromHash(hash: string): SectionId {
 export function Navbar() {
   const pathname = usePathname();
   const [active, setActive] = useState<SectionId>("about");
-  const isReading = pathname.startsWith("/blog/");
+  const isReading = pathname.startsWith("/blog/") || pathname.startsWith("/projects/");
 
   useEffect(() => {
     if (pathname !== "/") return;
