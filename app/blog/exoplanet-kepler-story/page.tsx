@@ -1,30 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ArticleLayout } from "@/app/components/writing/ArticleLayout";
+import { getWritingEntry } from "@/app/content/writing";
 import { KeplerImpactChart } from "./KeplerImpactChart";
 
+const article = getWritingEntry("exoplanet-kepler-story");
+
 export const metadata: Metadata = {
-  title: "How Kepler Changed Our View of Small Worlds | Muhammad Tarreq",
-  description:
-    "A data story on how Kepler changed exoplanet discovery from a search for giants into a census of small worlds.",
+  title: `${article.title} | Muhammad Tarreq`,
+  description: article.description,
 };
 
 export default function KeplerImpactPage() {
   return (
-    <article className="article-shell">
-      <header className="article-hero container-swiss">
-        <Link href="/blog" className="article-back">
-          Back to blog
-        </Link>
-        <p className="article-kicker">Data story</p>
-        <h1>How Kepler Changed Our View of Small Worlds</h1>
-        <p className="article-lede">
-          Before 2009, the confirmed exoplanet catalog was shaped by what our instruments could
-          most easily notice: giant planets, often close to their stars. Kepler changed the question.
-          Instead of asking whether a few strange systems existed, it asked how common small planets
-          might be when one telescope watched the same stars with patient precision.
-        </p>
-      </header>
-
+    <ArticleLayout article={article}>
       <div className="container-swiss article-grid">
         <aside className="article-side glass-card">
           <p className="card-kicker">About the data</p>
@@ -98,6 +86,6 @@ export default function KeplerImpactPage() {
           </p>
         </section>
       </section>
-    </article>
+    </ArticleLayout>
   );
 }

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { NewProjectCard } from "./components/NewProjectCard";
 import { WebsiteCard } from "./components/WebsiteCard";
 import { WritingCard } from "./components/WritingCard";
+import { writingEntries } from "./content/writing";
 
 const sections = ["about", "works", "websites", "writing", "contact"] as const;
 type SectionId = (typeof sections)[number];
@@ -134,18 +135,16 @@ export default function Page() {
                 </h1>
                 <div className="about-story">
                   <p>
-                    I&apos;m a computer science graduate from Universitas Indonesia who is
-                    interested in how technology can make everyday systems and communities
-                    work a little better.
+                    I&apos;m a computer science graduate from the University of Indonesia, currently working as a software engineer at BDO Indonesia.
                   </p>
                   <p>
-                    My path so far has moved through <span>remote-sensing research</span>,
+                    I am interested in conducting research about <span> remote-sensing </span>,
                     {" "}<span>digital products</span>, and <span>student-led organizations</span>.
                     Each has taught me to listen carefully, learn from different people, and
-                    turn uncertain problems into something practical.
+                    turn uncertainites into probabilites.
                   </p>
                   <p>
-                    I&apos;m still navigating what comes next as I learn and unlearn along the way.
+                    I&apos;m excited to navigate forward as I learn and unlearn along the way.
                   </p>
                 </div>
                 <div className="primary-actions">
@@ -179,9 +178,8 @@ export default function Page() {
           {active === "works" && (
             <div className="collection-layout">
               <header className="collection-header">
-                <p className="eyebrow">A small selection</p>
-                <h1 id="works-title">Work with a reason.</h1>
-                <p>Research and organizing shaped around real people, real constraints, and useful outcomes.</p>
+                <h1 id="works-title">My Experiences.</h1>
+                <p>Slices of my research and activities that revolves around people and exploration.</p>
               </header>
               <div className="works-grid">
                 <NewProjectCard
@@ -206,10 +204,8 @@ export default function Page() {
             <div className="collection-layout">
               <header className="collection-header collection-header-wide">
                 <div>
-                  <p className="eyebrow">Made for the web</p>
-                  <h1 id="websites-title">Useful places online.</h1>
+                  <h1 id="websites-title">Selected Works</h1>
                 </div>
-                <p>Small digital spaces made for prayer, architecture, and a community library.</p>
               </header>
               <div className="websites-grid">
                 <WebsiteCard
@@ -243,30 +239,20 @@ export default function Page() {
           {active === "writing" && (
             <div className="writing-layout">
               <header className="collection-header">
-                <p className="eyebrow">Notes along the way</p>
-                <h1 id="writing-title">Things I&apos;ve been thinking about.</h1>
+                <h1 id="writing-title">The Writings</h1>
+                <p>
+                  My way of expressing and translating my curiosities into a brief article.
+                </p>
               </header>
-              <div className="writing-list numbered-writing-list">
-                <WritingCard
-                  title="Live Your Life at Full Power"
-                  excerpt="On operating at full capacity — in work, presence, attention, and everyday moments."
-                  href="https://medium.com/@tarreq.maulana/live-your-life-at-full-power-c9c55bd51a42"
-                />
-                <WritingCard
-                  title="Refactor: A Forge to The Structure"
-                  excerpt="What the discipline of refactoring teaches us about confronting complexity."
-                  href="https://medium.com/@tarreq.maulana/refactor-a-forge-to-the-structure-4b5911753f43"
-                />
-                <WritingCard
-                  title="Market Research Guest Lecture"
-                  excerpt="Notes on how market research operates beyond surveys and inside real decisions."
-                  href="https://medium.com/@tarreq.maulana/market-research-guest-lecture-836a52c66510"
-                />
-                <WritingCard
-                  title="Achieving Goals through Pitch"
-                  excerpt="How framing a goal as a pitch sharpens the objective and the path toward it."
-                  href="https://medium.com/@tarreq.maulana/achieving-goals-through-pitch-846bf774cdc7"
-                />
+              <div className="writing-index-preview">
+                <div className="writing-list numbered-writing-list">
+                  {writingEntries.slice(0, 3).map((article) => (
+                    <WritingCard key={article.slug} article={article} />
+                  ))}
+                </div>
+                <a className="writing-all-link" href="/blog">
+                  View all writings <ArrowRight size={16} aria-hidden="true" />
+                </a>
               </div>
             </div>
           )}
@@ -274,10 +260,9 @@ export default function Page() {
           {active === "contact" && (
             <div className="contact-layout">
               <div>
-                <p className="eyebrow">Get in touch</p>
+                <p className="eyebrow">Let's get in touch</p>
                 <h1 id="contact-title">
-                  Have something
-                  <span>worth exploring?</span>
+                  Contact Me
                 </h1>
               </div>
               <div className="contact-panel">

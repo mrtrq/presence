@@ -30,6 +30,7 @@ function sectionFromHash(hash: string): SectionId {
 export function Navbar() {
   const pathname = usePathname();
   const [active, setActive] = useState<SectionId>("about");
+  const isReading = pathname.startsWith("/blog/");
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -59,7 +60,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className="nav-wrap" aria-label="Portfolio sections">
+    <nav className={`nav-wrap${isReading ? " nav-wrap-reading" : ""}`} aria-label="Portfolio sections">
       <div className="dock-shell">
         {links.map(({ id, label, icon: Icon }) => {
           const isActive = pathname === "/" && active === id;

@@ -1,0 +1,25 @@
+import { ArticleLayout } from "@/app/components/writing/ArticleLayout";
+import { getWritingEntry } from "@/app/content/writing";
+
+export const article = getWritingEntry("on-making-useful-things");
+
+export const metadata = {
+  title: `${article.title} | Muhammad Tarreq`,
+  description: article.description,
+};
+
+<ArticleLayout article={article}>
+  <div className="note-body article-prose">
+
+I keep returning to a simple question when I make something: will this leave another person with a little less friction than they had before?
+
+Usefulness does not always arrive as a grand product or a polished piece of technology. Sometimes it is a clearer explanation, a system that asks for one fewer step, or a small decision that makes a community easier to participate in. The scale matters less than the attention behind it.
+
+That attention begins with listening. It means resisting the urge to solve the most visible version of a problem before understanding the quieter constraints around it. What looks elegant from the outside can still feel difficult to the person who has to live with it.
+
+I am learning to value work that can explain why it exists. The best outcome is not simply that something has been made, but that someone can move through their day with more clarity, confidence, or room to focus on what matters to them.
+
+This is still a direction rather than a conclusion. For now, it is a useful way to choose what deserves care: make the thing understandable, make it considerate, and let delight arrive after it has earned its place.
+
+  </div>
+</ArticleLayout>

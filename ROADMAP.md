@@ -173,7 +173,7 @@ Status: planned.
 - [ ] Move homepage content into typed data rather than hard-coded repeated JSX.
 - [ ] Define project categories: Research, Community, Web, and Experiment.
 - [ ] Define consistent project fields: role, period, context, contribution, outcome, links, media.
-- [ ] Define consistent article fields: title, date, description, format, topics, reading time.
+- [x] Define consistent article fields: title, date, description, format, topics, reading time.
 - [ ] Decide what “current” or “now” information belongs on the profile.
 
 Definition of done: adding a project or article requires editing content data, not redesigning a page.
@@ -195,16 +195,21 @@ Definition of done: a visitor can understand what Tarreq did, why it mattered, a
 
 ### Phase 4 — Writing and blog
 
-Status: foundation exists; integration remains.
+Status: core implementation complete; editorial review and future publishing remain.
 
 - [x] Create a `/blog` route.
 - [x] Create two interactive exoplanet stories.
-- [x] Link existing Medium writing from the homepage.
-- [ ] Surface local blog articles inside the main Writing scene.
-- [ ] Create a reusable article layout and metadata model.
-- [ ] Add topic labels and a simple archive.
-- [ ] Decide whether future essays live locally, on Medium, or are mirrored.
-- [ ] Add previous/next reading navigation.
+- [x] Replace outdated Medium links on the homepage with local writing.
+- [x] Surface the three most recent local articles inside the main Writing scene.
+- [x] Establish Note and Visual story as the two complementary formats.
+- [x] Create a reusable article layout and typed metadata model.
+- [x] Add local MDX authoring for quiet, text-focused Notes.
+- [x] Add topic labels and All / Notes / Visual stories archive filters.
+- [x] Make the website the local-first home for future writing.
+- [x] Add copy-link and previous/next reading navigation.
+- [x] Make article reading distraction-free while preserving a clear return route.
+- [ ] Complete editorial review of the first Note before launch.
+- [ ] Add richer image, caption, and pull-quote components when a real article needs them.
 - [ ] Add RSS only after the local publishing workflow is stable.
 
 Definition of done: Writing feels like a first-class part of the portfolio and new posts can be published consistently.
@@ -283,6 +288,8 @@ Definition of done: the site is publishable, observable, and maintainable withou
 - **2026-08-14:** Chose “clarity first, delight second” as the interaction strategy.
 - **2026-08-14:** Treated muhraufan.com as behavioral inspiration, not a visual or feature template.
 - **2026-08-15:** Completed the responsive spacing system with wide, standard, and reading-width tokens plus 6vw desktop gutters.
+- **2026-08-15:** Made the website the local-first home for writing, with Notes and Visual stories sharing one archive and reading system.
+- **2026-08-15:** Kept the bottom dock on the archive but removed it from article pages to protect distraction-free reading.
 
 ## How to maintain this roadmap
 

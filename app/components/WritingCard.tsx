@@ -1,30 +1,23 @@
-import { ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import {
+  type WritingEntry,
+  writingFormatLabels,
+} from "@/app/content/writing";
 
-export function WritingCard({
-  title,
-  excerpt,
-  href,
-}: {
-  title: string;
-  excerpt: string;
-  href: string;
-}) {
+export function WritingCard({ article }: { article: WritingEntry }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="writing-row group"
-    >
+    <Link href={`/blog/${article.slug}`} className="writing-row group">
       <div className="min-w-0">
-        <h3 className="mb-2 text-base font-medium leading-snug group-hover:underline">
-          {title}
-        </h3>
-        <p className="card-muted text-sm leading-relaxed">
-          {excerpt}
-        </p>
+        <div className="writing-row-meta">
+          <span>{writingFormatLabels[article.format]}</span>
+          <span aria-hidden="true">·</span>
+          <span>{article.readingTime} min</span>
+        </div>
+        <h3>{article.title}</h3>
+        <p className="card-muted">{article.description}</p>
       </div>
-      <ExternalLink className="mt-1 h-4 w-4 shrink-0 opacity-45 transition-opacity group-hover:opacity-100" />
-    </a>
+      <ArrowRight className="writing-row-arrow" size={17} aria-hidden="true" />
+    </Link>
   );
 }

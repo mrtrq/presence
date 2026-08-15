@@ -1,28 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ArticleLayout } from "@/app/components/writing/ArticleLayout";
+import { getWritingEntry } from "@/app/content/writing";
 import { ExoplanetD3Story } from "./ExoplanetD3Story";
 
+const article = getWritingEntry("exoplanet-atlas");
+
 export const metadata: Metadata = {
-  title: "Exoplanet Atlas with D3 | Muhammad Tarreq",
-  description:
-    "A D3.js data story using NASA Exoplanet Archive data to explore how confirmed exoplanet discoveries changed over time.",
+  title: `${article.title} | Muhammad Tarreq`,
+  description: article.description,
 };
 
 export default function ExoplanetAtlasPage() {
   return (
-    <article className="article-shell">
-      <header className="article-hero container-swiss">
-        <Link href="/blog" className="article-back">
-          Back to blog
-        </Link>
-        <p className="article-kicker">D3.js data story</p>
-        <h1>What kind of exoplanets did we learn to see?</h1>
-        <p className="article-lede">
-          A small visual investigation using NASA Exoplanet Archive data. The question is simple:
-          as instruments changed, did the confirmed planets we found also change?
-        </p>
-      </header>
-
+    <ArticleLayout article={article}>
       <div className="container-swiss article-grid">
         <aside className="article-side glass-card">
           <p className="card-kicker">Dataset</p>
@@ -127,6 +117,6 @@ export default function ExoplanetAtlasPage() {
           </ul>
         </section>
       </section>
-    </article>
+    </ArticleLayout>
   );
 }
