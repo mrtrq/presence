@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Muhammad Tarreq',
   description: 'Navigating Through',
   icons: {
-    icon: '/favicon.ico'
+    icon: '/favicon.svg'
   },
   keywords: [
     'Muhammad Tarreq',
