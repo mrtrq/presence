@@ -65,16 +65,16 @@ const KEPLER_END = 2018;
 const METHOD_ORDER: MethodGroup[] = ["Transit", "Radial Velocity", "Transit Timing", "Other"];
 
 const METHOD_COLORS: Record<MethodGroup, string> = {
-  Transit: "#28b9ff",
-  "Radial Velocity": "#ffd84a",
-  "Transit Timing": "#8f7cf7",
-  Other: "#8fa1ad",
+  Transit: "#2b7ea3",
+  "Radial Velocity": "#f2c230",
+  "Transit Timing": "#c89412",
+  Other: "#6b8a7a",
 };
 
 const ERA_COLORS: Record<EraId, string> = {
-  before: "#8fa1ad",
-  kepler: "#28b9ff",
-  after: "#35c28f",
+  before: "#6b8a7a",
+  kepler: "#2b7ea3",
+  after: "#2f6b4f",
 };
 
 const RADIUS_BANDS = [
@@ -256,7 +256,7 @@ function buildStoryData(data: Exoplanet[]): StoryData {
 
 function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <div className="metric-card glass-card">
+    <div className="metric-card">
       <p className="card-kicker">{label}</p>
       <strong>{value}</strong>
       <span>{detail}</span>
@@ -347,7 +347,7 @@ function CumulativeSmallWorldsChart({ story }: { story: StoryData }) {
 
   return (
     <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+      <div className="viz-card">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 1</p>
@@ -367,14 +367,14 @@ function CumulativeSmallWorldsChart({ story }: { story: StoryData }) {
             aria-label="Cumulative and annual discoveries of exoplanets smaller than two Earth radii"
             viewBox={`0 0 ${width} ${height}`}
           >
-            <rect width={width} height={height} rx="8" fill="rgba(255,255,255,0.44)" />
+            <rect width={width} height={height} rx="8" fill="rgba(255,253,246,0.55)" />
 
             <rect
               x={keplerX}
               y={topPanel.top}
               width={keplerWidth}
               height={topPanel.bottom - topPanel.top}
-              fill="#28b9ff"
+              fill="#2b7ea3"
               opacity="0.12"
             />
             <rect
@@ -382,7 +382,7 @@ function CumulativeSmallWorldsChart({ story }: { story: StoryData }) {
               y={bottomPanel.top}
               width={keplerWidth}
               height={bottomPanel.bottom - bottomPanel.top}
-              fill="#28b9ff"
+              fill="#2b7ea3"
               opacity="0.12"
             />
 
@@ -401,11 +401,11 @@ function CumulativeSmallWorldsChart({ story }: { story: StoryData }) {
               </g>
             ))}
 
-            <path d={cumulativeArea(story.yearlyData) ?? undefined} fill="#28b9ff" opacity="0.17" />
+            <path d={cumulativeArea(story.yearlyData) ?? undefined} fill="#2b7ea3" opacity="0.17" />
             <path
               d={cumulativeLine(story.yearlyData) ?? undefined}
               fill="none"
-              stroke="#0d1726"
+              stroke="#173a29"
               strokeWidth="2.2"
             />
 
@@ -432,7 +432,7 @@ function CumulativeSmallWorldsChart({ story }: { story: StoryData }) {
                 width={barWidth}
                 height={bottomPanel.bottom - annualY(row.count)}
                 rx="2"
-                fill={row.year >= KEPLER_START && row.year <= KEPLER_END ? "#28b9ff" : "#35c28f"}
+                fill={row.year >= KEPLER_START && row.year <= KEPLER_END ? "#2b7ea3" : "#2f6b4f"}
                 opacity={row.count ? 0.7 : 0.18}
               />
             ))}
@@ -473,7 +473,7 @@ function CumulativeSmallWorldsChart({ story }: { story: StoryData }) {
 
             {story.peakYear ? (
               <g transform={`translate(${x(story.peakYear.year)}, ${annualY(story.peakYear.count)})`}>
-                <circle r="4" fill="#0d1726" />
+                <circle r="4" fill="#173a29" />
                 <text x="10" y="-8" className="chart-note">
                   Peak: {story.peakYear.year}
                 </text>
@@ -561,7 +561,7 @@ function EraRateChart({ story }: { story: StoryData }) {
           aria-label="Average annual small exoplanet discoveries before, during, and after Kepler"
           viewBox={`0 0 ${width} ${height}`}
         >
-          <rect width={width} height={height} rx="8" fill="rgba(255,255,255,0.42)" />
+          <rect width={width} height={height} rx="8" fill="rgba(255,253,246,0.6)" />
 
           {yTicks.map((tick) => (
             <g key={tick}>
@@ -664,7 +664,7 @@ function MethodMixChart({ story }: { story: StoryData }) {
           aria-label="Discovery method mix for small exoplanets by era"
           viewBox={`0 0 ${width} ${height}`}
         >
-          <rect width={width} height={height} rx="8" fill="rgba(255,255,255,0.42)" />
+          <rect width={width} height={height} rx="8" fill="rgba(255,253,246,0.6)" />
 
           {story.eras.map((era, index) => {
             const y = margin.top + index * (rowHeight + rowGap);
@@ -680,7 +680,7 @@ function MethodMixChart({ story }: { story: StoryData }) {
                   width={width - margin.left - margin.right}
                   height={rowHeight}
                   rx="6"
-                  fill="rgba(13,23,38,0.06)"
+                  fill="rgba(23,58,41,0.07)"
                 />
 
                 {METHOD_ORDER.map((method) => {
@@ -738,7 +738,7 @@ function EraComparisonSection({ story }: { story: StoryData }) {
 
   return (
     <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+      <div className="viz-card">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 2</p>
@@ -800,7 +800,7 @@ function RadiusDistributionSection({ story }: { story: StoryData }) {
 
   return (
     <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+      <div className="viz-card">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 3</p>
@@ -819,7 +819,7 @@ function RadiusDistributionSection({ story }: { story: StoryData }) {
             aria-label="Radius distribution for exoplanets smaller than two Earth radii"
             viewBox={`0 0 ${width} ${height}`}
           >
-            <rect width={width} height={height} rx="8" fill="rgba(255,255,255,0.42)" />
+            <rect width={width} height={height} rx="8" fill="rgba(255,253,246,0.6)" />
 
             {xTicks.map((tick) => (
               <g key={tick}>
@@ -853,7 +853,7 @@ function RadiusDistributionSection({ story }: { story: StoryData }) {
                     width={barWidth}
                     height={y.bandwidth()}
                     rx="6"
-                    fill={bin.label === "Super-Earth" ? "#28b9ff" : bin.label === "Earth-size" ? "#35c28f" : "#ffd84a"}
+                    fill={bin.label === "Super-Earth" ? "#2b7ea3" : bin.label === "Earth-size" ? "#2f6b4f" : "#f2c230"}
                     opacity="0.8"
                   />
                   <text x={margin.left + barWidth + 8} y={yPosition + y.bandwidth() / 2 + 4} className="chart-note">
@@ -927,7 +927,7 @@ export function KeplerImpactChart() {
   if (status === "loading") {
     return (
       <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+        <div className="viz-card">
           <p className="card-kicker">Loading Kepler data story</p>
           <div className="viz-loading" />
         </div>
@@ -938,7 +938,7 @@ export function KeplerImpactChart() {
   if (status === "error" || !story) {
     return (
       <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+        <div className="viz-card">
           <p className="card-kicker">Dataset unavailable</p>
           <p className="card-muted">The local exoplanet CSV could not be loaded.</p>
         </div>

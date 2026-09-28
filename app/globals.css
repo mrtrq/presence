@@ -1085,6 +1085,10 @@ svg {
   align-items: flex-end;
   justify-content: center;
   padding: 0;
+  /* The entry animation slides the panel in from the right, which would
+     otherwise extend past the viewport and produce a transient horizontal
+     scrollbar. */
+  overflow-x: clip;
 }
 
 /*
@@ -1660,5 +1664,528 @@ svg {
 
   .hero-lede {
     display: none;
+  }
+}
+
+/* ========================================================================== *
+ * READING PAGES
+ *
+ * The two data stories and the writing index are long-form, so they are
+ * ordinary scrolling pages rather than panels. They share the home screen's
+ * tokens and drawn surfaces but use a calmer measure, because the reader here
+ * is actually reading rather than browsing.
+ * ========================================================================== */
+
+.read-shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.read-top {
+  position: relative;
+  z-index: 30;
+  padding-block: 0.9rem;
+  border-bottom: 2px dashed var(--rule);
+}
+
+.read-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem 1.2rem;
+  flex-wrap: wrap;
+}
+
+.read-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.7rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 12px 10px 13px 11px;
+  background: var(--color-paper);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 180ms var(--ease-snap),
+    background 160ms var(--ease-paper);
+}
+
+.read-back:hover {
+  background: var(--color-sun-bright);
+  transform: translateX(-3px);
+}
+
+.read-main {
+  flex: 1;
+  padding-block: clamp(1.5rem, 4vw, 3rem) clamp(3rem, 7vw, 5rem);
+}
+
+/* --- index ---------------------------------------------------------------- */
+
+.read-hero {
+  max-width: 44rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.read-hero h1 {
+  margin-top: 0.35rem;
+}
+
+.read-hero p {
+  margin-top: 0.85rem;
+  color: var(--color-ink-soft);
+  font-size: 1.06rem;
+  line-height: 1.62;
+}
+
+.read-list {
+  display: grid;
+  gap: 1rem;
+  max-width: 46rem;
+}
+
+.read-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.25rem 1.3rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.read-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.14;
+}
+
+.read-card p:last-child {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --- article -------------------------------------------------------------- */
+
+.article-shell {
+  padding-bottom: 0;
+}
+
+.article-hero {
+  max-width: 46rem;
+  padding-block: 0 1.75rem;
+}
+
+.article-kicker {
+  color: var(--color-forest);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.article-hero h1 {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5.4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.04;
+}
+
+.article-lede {
+  max-width: 62ch;
+  margin-top: 1rem;
+  color: var(--color-ink-soft);
+  font-size: clamp(1.02rem, 2vw, 1.16rem);
+  line-height: 1.62;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin-block: 1.5rem 2rem;
+}
+
+.article-side {
+  padding: 1.1rem 1.15rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.article-side p + p {
+  margin-top: 0.7rem;
+}
+
+.article-side .label {
+  margin-bottom: 0.35rem;
+}
+
+.article-copy {
+  max-width: 44rem;
+}
+
+.article-copy > p {
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: var(--color-ink-soft);
+}
+
+.article-copy > p + p {
+  margin-top: 1rem;
+}
+
+.article-copy h2 {
+  margin-top: 2.4rem;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.article-copy h2:first-child {
+  margin-top: 0;
+}
+
+.source-list {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+}
+
+.source-list li {
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.source-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px 3px 2px 4px;
+  background: var(--color-sun-deep);
+}
+
+/* --- charts and figures --------------------------------------------------- */
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.metric-card {
+  padding: 1rem 1.1rem;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.metric-card span {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.viz-section {
+  margin-block: 1.5rem 2rem;
+}
+
+.viz-card {
+  padding: 1.1rem 1.15rem 1.25rem;
+}
+
+.viz-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-bottom: 0.9rem;
+}
+
+.viz-header h2 {
+  margin-top: 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.viz-header p:last-child {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
+
+.viz-frame {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-paper) 70%, transparent);
+}
+
+.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 30rem;
+}
+
+.chart-grid-line {
+  stroke: rgba(23, 58, 41, 0.09);
+  stroke-width: 1;
+}
+
+.chart-axis-line {
+  stroke: rgba(23, 58, 41, 0.3);
+  stroke-width: 1;
+}
+
+.chart-annotation-line {
+  stroke: rgba(23, 58, 41, 0.38);
+  stroke-dasharray: 4 5;
+  stroke-width: 1;
+}
+
+.chart-hover-line {
+  stroke: rgba(23, 58, 41, 0.65);
+  stroke-width: 1;
+}
+
+.chart-axis-text,
+.chart-note {
+  fill: var(--color-ink-soft);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.method-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 0.9rem;
+}
+
+.method-filter button {
+  min-height: 40px;
+  padding: 0.45rem 0.85rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 12px 10px 13px 11px;
+  background: var(--color-paper);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 180ms var(--ease-snap),
+    background 160ms var(--ease-paper);
+}
+
+.method-filter button:hover {
+  transform: translateY(-2px);
+  background: var(--color-sun-bright);
+}
+
+.method-filter button.is-active {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.legend-row,
+.planet-caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  align-items: center;
+  padding-top: 0.9rem;
+  color: var(--color-ink-soft);
+  font-size: 0.84rem;
+}
+
+.legend-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-row i {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 3px 4px 3px 5px;
+}
+
+.chart-tooltip {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.65rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 12px 10px 13px 11px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  line-height: 1.24;
+  box-shadow: var(--lift);
+}
+
+.chart-tooltip strong {
+  font-size: 0.88rem;
+}
+
+.chart-tooltip i {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-right: 0.3rem;
+  border-radius: 2px 3px 2px 4px;
+}
+
+.kepler-chart-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.kepler-viz-panel {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.kepler-viz-panel p {
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.kepler-insight-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+  padding-top: 0.9rem;
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.kepler-insight-strip span {
+  padding-top: 0.6rem;
+  border-top: 2px dashed var(--rule);
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.85rem;
+  margin-block: 1.1rem 2rem;
+}
+
+.comparison-card {
+  padding: 1.05rem 1.1rem;
+}
+
+.comparison-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.comparison-card p {
+  color: var(--color-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+.viz-loading {
+  height: 18rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-paper) 60%, transparent);
+  background-size: 200% 100%;
+  animation: wash 1.4s ease-in-out infinite;
+}
+
+@keyframes wash {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.card-kicker {
+  color: var(--color-forest);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.card-muted {
+  color: var(--color-ink-soft);
+}
+
+.read-foot {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 2px dashed var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 900px) {
+  .article-grid {
+    grid-template-columns: minmax(0, 0.34fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .article-side {
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .metric-grid,
+  .kepler-insight-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .comparison-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .kepler-chart-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .viz-header {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.85fr);
+    gap: 1.5rem;
+    align-items: end;
   }
 }

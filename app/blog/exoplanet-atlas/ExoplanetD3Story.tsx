@@ -41,12 +41,12 @@ const METHOD_ORDER: MethodGroup[] = [
 ];
 
 const METHOD_COLORS: Record<MethodGroup, string> = {
-  Transit: "#28b9ff",
-  "Radial Velocity": "#ffd84a",
-  Microlensing: "#35c28f",
-  Imaging: "#ff8a65",
-  Timing: "#8f7cf7",
-  Other: "#8fa1ad",
+  Transit: "#2b7ea3",
+  "Radial Velocity": "#f2c230",
+  Microlensing: "#2f6b4f",
+  Imaging: "#e08a4f",
+  Timing: "#c89412",
+  Other: "#6b8a7a",
 };
 
 const numberFormat = new Intl.NumberFormat("en-US");
@@ -136,7 +136,7 @@ function buildYearRows(data: Exoplanet[]) {
 
 function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <div className="metric-card glass-card">
+    <div className="metric-card">
       <p className="card-kicker">{label}</p>
       <strong>{value}</strong>
       <span>{detail}</span>
@@ -190,7 +190,7 @@ function DiscoveryTimeline({ data }: { data: Exoplanet[] }) {
 
   return (
     <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+      <div className="viz-card">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 1</p>
@@ -211,8 +211,8 @@ function DiscoveryTimeline({ data }: { data: Exoplanet[] }) {
           >
             <defs>
               <linearGradient id="timelineGlow" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stopColor="rgba(255,255,255,0.82)" />
-                <stop offset="100%" stopColor="rgba(40,185,255,0.08)" />
+                <stop offset="0%" stopColor="rgba(255,253,246,0.92)" />
+                <stop offset="100%" stopColor="rgba(43,126,163,0.1)" />
               </linearGradient>
             </defs>
 
@@ -272,7 +272,7 @@ function DiscoveryTimeline({ data }: { data: Exoplanet[] }) {
             {topYear ? (
               <g transform={`translate(${x(topYear.year)}, ${y(topYear.total)})`}>
                 <line y1={0} y2={height - margin.bottom - y(topYear.total)} className="chart-annotation-line" />
-                <circle r="4" fill="#0d1726" />
+                <circle r="4" fill="#173a29" />
                 <text x="10" y="-10" className="chart-note">
                   Peak: {topYear.year}
                 </text>
@@ -385,7 +385,7 @@ function PlanetMap({ data }: { data: Exoplanet[] }) {
 
   return (
     <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+      <div className="viz-card">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 2</p>
@@ -421,7 +421,7 @@ function PlanetMap({ data }: { data: Exoplanet[] }) {
             aria-label="Scatter plot of planet radius by host star temperature"
             viewBox={`0 0 ${width} ${height}`}
           >
-            <rect width={width} height={height} rx="8" fill="rgba(255,255,255,0.42)" />
+            <rect width={width} height={height} rx="8" fill="rgba(255,253,246,0.6)" />
 
             {xTicks.map((tick) => (
               <g key={tick}>
@@ -497,7 +497,7 @@ function PlanetMap({ data }: { data: Exoplanet[] }) {
                 const cy = y(planet.radius);
                 const pointColor = planet.equilibriumTemperature
                   ? color(planet.equilibriumTemperature)
-                  : "rgba(95,111,123,0.5)";
+                  : "rgba(59,99,80,0.5)";
 
                 return (
                   <circle
@@ -506,7 +506,7 @@ function PlanetMap({ data }: { data: Exoplanet[] }) {
                     cy={cy}
                     r={planet.radius > 10 ? 3.6 : planet.radius > 2 ? 2.8 : 2.1}
                     fill={pointColor}
-                    stroke="rgba(255,255,255,0.72)"
+                    stroke="rgba(255,253,246,0.85)"
                     strokeWidth="0.55"
                   />
                 );
@@ -515,7 +515,7 @@ function PlanetMap({ data }: { data: Exoplanet[] }) {
 
             {hovered ? (
               <g>
-                <circle cx={hovered.x} cy={hovered.y} r="7" fill="none" stroke="#0d1726" strokeWidth="1.5" />
+                <circle cx={hovered.x} cy={hovered.y} r="7" fill="none" stroke="#173a29" strokeWidth="1.5" />
                 <foreignObject
                   x={hovered.x > width * 0.68 ? hovered.x - 222 : hovered.x + 14}
                   y={hovered.y > height * 0.6 ? hovered.y - 136 : hovered.y + 12}
@@ -621,7 +621,7 @@ export function ExoplanetD3Story() {
   if (status === "loading") {
     return (
       <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+        <div className="viz-card">
           <p className="card-kicker">Loading D3 story</p>
           <div className="viz-loading" />
         </div>
@@ -632,7 +632,7 @@ export function ExoplanetD3Story() {
   if (status === "error") {
     return (
       <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+        <div className="viz-card">
           <p className="card-kicker">Dataset unavailable</p>
           <p className="card-muted">The local exoplanet CSV could not be loaded.</p>
         </div>
