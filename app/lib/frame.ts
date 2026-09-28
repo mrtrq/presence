@@ -36,6 +36,11 @@ export type FrameOptions = {
   style?: FrameStyle;
   /** Gap between the canvas edge and the line, as a 0-1 fraction. */
   inset?: number;
+  /**
+   * Opaque surface colour painted behind the outline. Required for anything
+   * sitting on top of other content; without it the interior is transparent.
+   */
+  fill?: string;
 };
 
 type Path = { d: string; fill?: string };
@@ -126,14 +131,28 @@ function roughOutline(
   ].join(" ");
 }
 
-function render(paths: Path[], stroke: string, strokeWidth: number): string {
+function render(
+  paths: Path[],
+  stroke: string,
+  strokeWidth: number,
+  fill?: string
+): string {
   const body = paths
-    .map(({ d, fill }) =>
-      fill
-        ? `<path d="${d}" fill="${fill}" stroke="none"/>`
+    .map(({ d, fill: pathFill }) =>
+      pathFill
+        ? `<path d="${d}" fill="${pathFill}" stroke="none"/>`
         : `<path d="${d}" fill="none" stroke="${stroke}" stroke-width="${strokeWidth}"/>`
     )
     .join("");
+
+  // An opaque backing rectangle sits under the outline. With
+  // `border-image-slice: ... fill` this is what paints the card interior, which
+  // means the tone colour has to be baked in here rather than set as a CSS
+  // background — otherwise the surface is transparent and whatever is behind
+  // the card shows through the text.
+  const backing = fill
+    ? `<rect width="${SIZE}" height="${SIZE}" fill="${fill}"/>`
+    : "";
 
   // Explicit width and height matter. Without them the image has no intrinsic
   // size, so `border-image-slice: 26` has an ambiguous reference and the
@@ -141,7 +160,10 @@ function render(paths: Path[], stroke: string, strokeWidth: number): string {
   // specks along the edges.
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" ` +
-    `viewBox="0 0 ${SIZE} ${SIZE}" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`
+    `viewBox="0 0 ${SIZE} ${SIZE}" stroke-linecap="round" stroke-linejoin="round">` +
+    backing +
+    body +
+    `</svg>`
   );
 }
 
@@ -157,16 +179,21 @@ export function sketchBorderImage(options: FrameOptions): string {
     roughness = 1,
     style = "solid",
     inset = 0.08,
+    fill,
   } = options;
 
-  const key = JSON.stringify([seed, radius, stroke, strokeWidth, roughness, style, inset]);
+  const key = JSON.stringify([seed, radius, stroke, strokeWidth, roughness, style, inset, fill]);
   const hit = cache.get(key);
   if (hit) return hit;
 
   const lo = inset * SIZE;
   const hi = SIZE - inset * SIZE;
   const size = hi - lo;
-  const parts = roundedRectParts(lo, lo, size, size, radius);
+  // A corner arc wider than the slice (SLICE) is clipped by the nine-slice
+  // split, which flattens the wobble into a straight edge. Clamp so a large
+  // radius still reads as a drawn corner rather than a ruled box.
+  const maxRadius = SLICE * 0.72;
+  const parts = roundedRectParts(lo, lo, size, size, Math.min(radius, maxRadius));
   const outline = roughness > 0 ? roughOutline(parts, seed, roughness) : straightOutline(parts);
 
   const paths: Path[] = [{ d: outline }];
@@ -177,7 +204,7 @@ export function sketchBorderImage(options: FrameOptions): string {
     });
   }
 
-  const svg = render(paths, stroke, strokeWidth).replace(/\s+/g, " ").trim();
+  const svg = render(paths, stroke, strokeWidth, fill).replace(/\s+/g, " ").trim();
   const value = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 
   cache.set(key, value);
@@ -186,12 +213,18 @@ export function sketchBorderImage(options: FrameOptions): string {
 
 /**
  * CSS custom properties for a hand-drawn border. Spread onto a class or inline
- * style; the class only needs to set the width and padding.
+ * style; the class only needs to set the padding and consume the variables.
+ *
+ * The border width tracks the stroke width, which matters more than it looks:
+ * `border-image` scales the whole slice into `--frame-width`, so a 4px stroke
+ * drawn into a 3px border comes out as a hairline with no visible wobble.
  */
 export function frameVars(options: FrameOptions): Record<string, string> {
+  const strokeWidth = options.strokeWidth ?? BORDER_WIDTH;
+
   return {
     "--frame-image": sketchBorderImage(options),
     "--frame-slice": String(SLICE),
-    "--frame-width": `${BORDER_WIDTH}px`,
+    "--frame-width": `${strokeWidth}px`,
   };
 }

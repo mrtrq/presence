@@ -20,6 +20,13 @@ const strokeFor = {
   forest: "#1d4a35",
 } as const;
 
+const fillFor = {
+  sun: "#fdf3d4",
+  sky: "#e4f2f9",
+  sprout: "#e8f2ec",
+  forest: "#dceae3",
+} as const;
+
 type Door = {
   id: PanelId;
   title: string;
@@ -87,8 +94,10 @@ export function DoorGrid() {
                 ...frameVars({
                   seed: `door:${door.id}`,
                   stroke: strokeFor[door.tone],
+                  strokeWidth: 4,
                   radius: 15,
                   roughness: 1.15,
+                  fill: fillFor[door.tone],
                 }),
               } as React.CSSProperties
             }

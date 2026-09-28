@@ -22,8 +22,9 @@ import { frameVars } from "@/app/lib/frame";
 const portraitFrame = frameVars({
   seed: "hero:portrait",
   radius: 18,
-  strokeWidth: 4,
+  strokeWidth: 5,
   roughness: 1.1,
+  fill: "#fffdf6",
 });
 
 export default function Page() {

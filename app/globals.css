@@ -71,15 +71,21 @@ body {
   overflow-x: hidden;
 }
 
-/* Paper grain. Sits under everything, ignores pointer events. */
+/*
+ * Paper grain.
+ *
+ * Fixed, so it tiles like real paper texture rather than scrolling with the
+ * content, and painted above the panels (z-index 200) so the paper reads as a
+ * single continuous surface. Without it the panels look like glass.
+ */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 200;
   pointer-events: none;
-  opacity: 0.5;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  opacity: 0.85;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
 }
 
 /* Oversized, very soft colour washes that suggest a painted background. */
@@ -466,6 +472,8 @@ svg {
   border-image-slice: var(--frame-slice) fill;
   border-image-width: var(--frame-width);
   border-image-repeat: round;
+  /* The tone tint is drawn into the slice itself, not composited underneath,
+     so the surface is fully opaque and text contrast does not shift. */
   background: var(--color-paper);
   text-decoration: none;
   color: inherit;
@@ -1079,13 +1087,22 @@ svg {
   padding: 0;
 }
 
+/*
+ * No backdrop-filter here.
+ *
+ * The scrim and the panel are siblings inside .panel-root. When the scrim has
+ * a backdrop-filter, Chrome promotes it to its own compositing layer, and the
+ * blurred backdrop gets composited *over* the sibling panel — so the home page
+ * shows through the panel's text even though the panel background is opaque.
+ * An opaque tint over a flat scrim achieves the same separation, costs no
+ * compositing layer, and keeps the panel readable.
+ */
 .panel-scrim {
   position: absolute;
   inset: 0;
   border: 0;
   padding: 0;
-  background: color-mix(in srgb, var(--color-ink) 42%, transparent);
-  backdrop-filter: blur(3px);
+  background: color-mix(in srgb, var(--color-ink) 46%, transparent);
   cursor: pointer;
   animation: fade-in 220ms var(--ease-paper) both;
 }
@@ -1098,13 +1115,13 @@ svg {
   width: 100%;
   max-height: 92dvh;
   border: var(--frame-width) solid transparent;
+  border-radius: 2px;
   border-image-source: var(--frame-image);
   border-image-slice: var(--frame-slice) fill;
   border-image-width: var(--frame-width);
   border-image-repeat: round;
   background: var(--color-paper);
   box-shadow: 0 -8px 40px color-mix(in srgb, var(--color-ink) 24%, transparent);
-  animation: sheet-up 320ms var(--ease-paper) both;
 }
 
 .panel-tab {
@@ -1190,16 +1207,45 @@ svg {
   }
 }
 
+/*
+ * `translate`, not `transform`.
+ *
+ * Animating `transform` promotes the panel to its own compositing layer, and
+ * a promoted layer composites `border-image ... fill` from the GPU rather than
+ * repainting it, which lets the home screen show through the opaque surface.
+ * Animating the longhand `translate` property avoids promotion while producing
+ * the same motion.
+ */
 @keyframes sheet-up {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    translate: 0 24px;
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    translate: 0 0;
   }
+}
+
+/*
+ * The panel's motion is applied to an inner wrapper rather than the panel
+ * surface itself.
+ *
+ * Anything that promotes `.panel-card` to its own compositing layer — an
+ * animated `transform` or `translate`, a filter, a backdrop-filter on a
+ * sibling — makes Chrome composite its `border-image ... fill` from the GPU.
+ * The interior of the slice is then not repainted, and the page behind shows
+ * straight through the supposedly opaque surface. Keeping the animation on a
+ * child means the border-image is painted normally and the motion is
+ * unchanged.
+ */
+.panel-motion {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  animation: sheet-up 320ms var(--ease-paper) both;
 }
 
 /* ========================================================================== *
@@ -1506,7 +1552,6 @@ svg {
     max-height: min(88dvh, 52rem);
     border-radius: 16px;
     box-shadow: 0 24px 70px color-mix(in srgb, var(--color-ink) 26%, transparent);
-    animation: panel-in 300ms var(--ease-paper) both;
   }
 
   .panel-tab {
@@ -1538,13 +1583,17 @@ svg {
   @keyframes panel-in {
     from {
       opacity: 0;
-      transform: translateX(28px);
+      translate: 28px 0;
     }
 
     to {
       opacity: 1;
-      transform: translateX(0);
+      translate: 0 0;
     }
+  }
+
+  .panel-motion {
+    animation-name: panel-in;
   }
 }
 

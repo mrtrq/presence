@@ -51,10 +51,11 @@ export function Panel({
 
   const frame = frameVars({
     seed: `panel:${id}`,
-    radius: 16,
+    radius: 14,
     stroke: "#173a29",
-    strokeWidth: 4,
+    strokeWidth: 6,
     roughness: 0.9,
+    fill: "#fffdf6",
   });
 
   return (
@@ -70,24 +71,30 @@ export function Panel({
         className="panel-card"
         style={frame as React.CSSProperties}
       >
-        <span
-          className="panel-tab"
-          style={{ background: toneInk[tone] }}
-          aria-hidden="true"
-        />
+        {/* The wrapper carries the entry animation. Putting it on .panel-card
+            instead would promote the border-image surface to a compositing
+            layer, and Chrome then fails to repaint the slice interior, letting
+            the home page show through the panel. See .panel-motion in the CSS. */}
+        <div className="panel-motion">
+          <span
+            className="panel-tab"
+            style={{ background: toneInk[tone] }}
+            aria-hidden="true"
+          />
 
-        <header className="panel-header">
-          <div className="panel-heading">
-            {icon ? <span className="panel-icon">{icon}</span> : null}
-            <div>
-              {kicker ? <p className="label">{kicker}</p> : null}
-              <h2 className="display-md">{title}</h2>
+          <header className="panel-header">
+            <div className="panel-heading">
+              {icon ? <span className="panel-icon">{icon}</span> : null}
+              <div>
+                {kicker ? <p className="label">{kicker}</p> : null}
+                <h2 className="display-md">{title}</h2>
+              </div>
             </div>
-          </div>
-          <Close onClick={onClose} />
-        </header>
+            <Close onClick={onClose} />
+          </header>
 
-        <div className="panel-body">{children}</div>
+          <div className="panel-body">{children}</div>
+        </div>
       </div>
     </div>
   );

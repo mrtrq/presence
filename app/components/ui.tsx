@@ -16,11 +16,16 @@ const toneStroke: Record<Palette, string> = {
   forest: "#1d4a35",
 };
 
+/**
+ * Tints are resolved to concrete hex values, not `color-mix()`, because they
+ * are baked into a data URI. A `color-mix()` here would serialise literally
+ * into the SVG and fail to parse, leaving the card transparent.
+ */
 const toneFill: Record<Palette, string> = {
-  sun: "color-mix(in srgb, var(--color-sun) 16%, var(--color-paper))",
-  sky: "color-mix(in srgb, var(--color-sky) 15%, var(--color-paper))",
-  sprout: "color-mix(in srgb, var(--color-sprout) 26%, var(--color-paper))",
-  forest: "color-mix(in srgb, var(--color-forest) 12%, var(--color-paper))",
+  sun: "#fdf3d4",
+  sky: "#e4f2f9",
+  sprout: "#e8f2ec",
+  forest: "#dceae3",
 };
 
 /**
@@ -43,16 +48,14 @@ export function Card({
   const frame = frameVars({
     seed: seed ?? `card:${className}`,
     stroke: toneStroke[tone],
-    strokeWidth: 3,
+    strokeWidth: 4,
     radius: 13,
     roughness: 1,
+    fill: toneFill[tone],
   });
 
   return (
-    <div
-      className={`card card-hover ${className}`}
-      style={{ ...frame, background: toneFill[tone], ...style } as React.CSSProperties}
-    >
+    <div className={`card card-hover ${className}`} style={{ ...frame, ...style } as React.CSSProperties}>
       {children}
     </div>
   );
