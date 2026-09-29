@@ -1804,6 +1804,15 @@ svg {
   max-width: 46rem;
 }
 
+/*
+ * The featured post and the list below it share one measure. Without this the
+ * featured card spans the full container while everything under it stops at
+ * 46rem, which reads as a mistake rather than emphasis.
+ */
+.read-featured {
+  max-width: 46rem;
+}
+
 .read-card {
   position: relative;
   display: flex;

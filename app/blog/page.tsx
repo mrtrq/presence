@@ -28,7 +28,7 @@ export default function BlogPage() {
         <Squiggle className="rule-squiggle" seed="index" />
       </header>
 
-      <Card tone="sun" seed="index:featured" className="featured-post">
+      <Card tone="sun" seed="index:featured" className="featured-post read-featured">
         <p className="label">Start here</p>
         <h2 className="display-md">
           <a
