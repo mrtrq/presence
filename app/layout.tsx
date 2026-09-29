@@ -11,16 +11,25 @@ import "./globals.css";
  * reading a paragraph of prose as well as for a friend skimming a card.
  */
 
+/**
+ * Both families are loaded as variable fonts.
+ *
+ * This is a weight decision, not a stylistic one. Listing discrete weights
+ * makes next/font emit one file per weight, and Caveat at three weights plus
+ * Nunito at four came to 111 kB before compression — the largest single asset
+ * on the home screen. `weight: "variable"` fetches one file per family
+ * covering the whole range the site uses.
+ */
 const hand = Caveat({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: "variable",
   variable: "--font-hand",
   display: "swap",
 });
 
 const sans = Nunito({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: "variable",
   variable: "--font-sans-sw",
   display: "swap",
 });
