@@ -63,6 +63,11 @@ export function usePanel(): PanelController {
   const [state, setState] = useState(current);
 
   useEffect(() => {
+    // Wire up on subscribe, not only on user action. Reading the hash has to
+    // happen on load, or a shared link like /#writing lands on the home screen
+    // with the panel closed.
+    ensureInitialised();
+
     listeners.add(setState);
     setState(current);
     return () => {
@@ -95,7 +100,20 @@ function ensureInitialised() {
 export function openPanel(id: PanelId) {
   ensureInitialised();
   if (readHash() === id) return;
-  window.location.hash = id;
+
+  /*
+   * pushState rather than assigning `location.hash`.
+   *
+   * Assigning the hash pushes a history entry whose `state` is null, so
+   * closePanel cannot tell "this panel was opened by a push" from "this panel
+   * was opened by a shared link" and the back button ends up navigating off the
+   * site instead of closing the panel. Recording the panel in the history
+   * state is what lets closePanel step back precisely.
+   *
+   * pushState does not fire hashchange, so the state is published here and the
+   * popstate listener covers the way back.
+   */
+  window.history.pushState({ panel: id }, "", `#${id}`);
   publish({ active: id });
 }
 
@@ -109,14 +127,17 @@ export function closePanel() {
   if (window.history.state?.panel) {
     // The panel was opened by a push, so step back rather than cutting the
     // history entry. This is what makes the back button close the panel.
+    // popstate then fires and clears `active` on its own.
     window.history.back();
-  } else {
-    // Opened by a direct link: replace so the hash does not linger.
-    if (window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname + window.location.search);
-    }
-    publish({ active: null });
+    return;
   }
+
+  // Opened by a direct link: there is no history entry to step back to, so
+  // replace the hash and close immediately.
+  if (window.location.hash) {
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
+  }
+  publish({ active: null });
 }
 
 /** Locks body scroll while a panel is open, and restores it afterwards. */

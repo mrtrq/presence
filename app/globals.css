@@ -157,10 +157,19 @@ svg {
   max-width: 100%;
 }
 
+/*
+ * Focus ring.
+ *
+ * Two rings, not one: a thick forest ring for contrast against the cream
+ * paper, and a thin light ring inside it so the indicator survives on the
+ * darker panel scrim too. A single colour that reads well on cream
+ * disappears against the ink scrim behind an open panel.
+ */
 :focus-visible {
-  outline: 3px solid var(--color-sky-deep);
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+  border-radius: 6px;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-sun) 55%, transparent);
 }
 
 .sr-only {
@@ -363,21 +372,21 @@ svg {
   font-size: 0.88rem;
 }
 
-/* Marker highlight behind a run of text. */
+/*
+ * Marker highlight behind a run of text.
+ *
+ * The highlight is the element's own background rather than an absolutely
+ * positioned ::before. An abspos pseudo-element on an inline box that wraps is
+ * positioned against the whole multi-line box, which paints one tall rectangle
+ * across the line break instead of one mark per line. A background with
+ * `box-decoration-break: clone` produces a proper mark on each fragment.
+ */
 .mark {
-  position: relative;
-  isolation: isolate;
-  white-space: nowrap;
-}
-
-.mark::before {
-  content: "";
-  position: absolute;
-  inset: 0.16em -0.1em 0.1em;
-  z-index: -1;
-  border-radius: 4px 10px 6px 12px;
-  background: color-mix(in srgb, var(--color-sun) 62%, transparent);
-  transform: rotate(-0.6deg);
+  padding: 0.06em 0.14em 0.1em;
+  border-radius: 5px 11px 6px 12px;
+  background: color-mix(in srgb, var(--color-sun) 55%, transparent);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* ========================================================================== *

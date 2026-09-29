@@ -273,15 +273,17 @@ export function ContactPanel() {
       </a>
 
       <ul className="social-list">
-        {socials.map((social) => (
-          <li key={social.label}>
-            <a className="social-row" href={social.href} {...external(social.href)}>
-              <span className="label">{social.label}</span>
-              <span className="social-value">{social.value}</span>
-              <ArrowUpRight aria-hidden="true" size={18} className="faint" />
-            </a>
-          </li>
-        ))}
+        {socials
+          .filter((social) => social.label !== "Email")
+          .map((social) => (
+            <li key={social.label}>
+              <a className="social-row" href={social.href} {...external(social.href)}>
+                <span className="label">{social.label}</span>
+                <span className="social-value">{social.value}</span>
+                <ArrowUpRight aria-hidden="true" size={18} className="faint" />
+              </a>
+            </li>
+          ))}
       </ul>
     </Panel>
   );
