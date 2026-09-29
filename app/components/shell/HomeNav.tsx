@@ -48,7 +48,7 @@ export function HomeNav() {
               </li>
             ))}
             <li>
-              <Link className="nav-pill nav-pill-link" href="/blog">
+              <Link className="nav-pill" href="/blog">
                 Stories
               </Link>
             </li>
