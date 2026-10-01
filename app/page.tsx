@@ -10,7 +10,7 @@ export default function HomePage() {
     <section className="view home">
       <div>
         <h1>
-          I&apos;m Tarreq, navigating forward as I learn and unlearn.
+          Hi! I&apos;m Tarreq
         </h1>
         <p className="lede">
           Computer science graduate from the University of Indonesia, software

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { CopyEmail } from "@/components/CopyEmail";
 import { Squiggle, Star } from "@/components/Doodles";
 import { profile } from "@/lib/content";
 
@@ -35,9 +36,7 @@ export default function AboutPage() {
           
         </p>
         <div className="row">
-          <a className="btn y" href={`mailto:${profile.email}`}>
-            {profile.email}
-          </a>
+          <CopyEmail email={profile.email} />
           <a className="btn" href={profile.github} target="_blank" rel="noreferrer">
             GitHub
           </a>
@@ -52,15 +51,17 @@ export default function AboutPage() {
         <Star className="dd" style={{ top: "2%", right: "10%" }} />
         <Squiggle className="dd" style={{ bottom: "4%", left: "8%" }} />
         <figure className="portrait">
-          <Image
-            src="/avatar.jpg"
-            alt="Tarreq standing in front of the Faculty of Computer Science building"
-            width={960}
-            height={1080}
-            sizes="(max-width: 820px) 190px, 300px"
-            priority
-          />
-          <figcaption>Fasilkom UI</figcaption>
+          <div className="crop">
+            <Image
+              src="/milkyway.jpeg"
+              alt="Picture of a milkyway"
+              width={960}
+              height={1080}
+              sizes="(max-width: 820px) 285px, 400px"
+              priority
+            />
+          </div>
+          <figcaption>the milky way</figcaption>
         </figure>
       </aside>
     </section>

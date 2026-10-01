@@ -1,16 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Entry } from "@/lib/content";
+import type { Entry, Kind } from "@/lib/content";
 
 export function MasterDetail({
   label,
   basePath,
   entries,
+  kinds,
   activeSlug,
 }: {
   label: string;
   basePath: string;
   entries: Entry[];
+  kinds: Kind[];
   activeSlug: string;
 }) {
   const i = Math.max(
@@ -23,21 +25,35 @@ export function MasterDetail({
 
   return (
     <section className="view md">
-      <nav className="list" role="tablist" aria-label={label}>
-        {entries.map((e, j) => (
-          <Link
-            key={e.slug}
-            href={`${basePath}/${e.slug}`}
-            className={`it c${j % 3}`}
-            role="tab"
-            aria-current={e.slug === active.slug ? "page" : undefined}
-            aria-selected={e.slug === active.slug}
-          >
-            <b>{e.title}</b>
-            <small>{e.meta}</small>
-          </Link>
-        ))}
-      </nav>
+      <div className="side">
+        <nav className="list" role="tablist" aria-label={label}>
+          {entries.map((e) => {
+            const kind = kinds.find((k) => k.id === e.kind);
+            return (
+              <Link
+                key={e.slug}
+                href={`${basePath}/${e.slug}`}
+                className={`it tone-${kind?.tone ?? "p"}`}
+                role="tab"
+                aria-current={e.slug === active.slug ? "page" : undefined}
+                aria-selected={e.slug === active.slug}
+              >
+                {kind && <span className="sr-only">{kind.label}: </span>}
+                <b>{e.title}</b>
+                <small>{e.meta}</small>
+              </Link>
+            );
+          })}
+        </nav>
+        <ul className="key" aria-label="What the card colors mean">
+          {kinds.map((k) => (
+            <li key={k.id}>
+              <i className={`tone-${k.tone}`} aria-hidden="true" />
+              {k.label}
+            </li>
+          ))}
+        </ul>
+      </div>
       <article className="reader">
         <h2>{active.title}</h2>
         <div className="meta">{active.meta}</div>

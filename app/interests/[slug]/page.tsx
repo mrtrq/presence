@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { MasterDetail } from "@/components/MasterDetail";
-import { interests } from "@/lib/content";
+import { interests, interestKinds } from "@/lib/content";
 
 export function generateStaticParams() {
   return interests.map((e) => ({ slug: e.slug }));
@@ -19,6 +19,7 @@ export default async function InterestsEntry({
       label="Interests"
       basePath="/interests"
       entries={interests}
+      kinds={interestKinds}
       activeSlug={slug}
     />
   );

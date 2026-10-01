@@ -13,9 +13,21 @@ export type EntryImage = {
   height: number;
 };
 
+/** Card colors in the list: y = yellow, s = sky, p = paper (white). */
+export type Tone = "y" | "s" | "p";
+
+/** What a card's color means. Every entry belongs to exactly one kind. */
+export type Kind = {
+  id: string;
+  label: string;
+  tone: Tone;
+};
+
 export type Entry = {
   slug: string;
   title: string;
+  /** Id of one of the section's kinds. */
+  kind: string;
   meta: string;
   body: string[];
   link?: EntryLink;
@@ -29,10 +41,22 @@ export const profile = {
   medium: "https://medium.com/@tarreq.maulana",
 } as const;
 
+export const writingKinds: Kind[] = [
+  { id: "story", label: "Data story", tone: "s" },
+  { id: "essay", label: "Essay or notes", tone: "y" },
+];
+
+export const interestKinds: Kind[] = [
+  { id: "build", label: "Build", tone: "y" },
+  { id: "research", label: "Research & learning", tone: "s" },
+  { id: "community", label: "Community", tone: "p" },
+];
+
 export const writing: Entry[] = [
   {
     slug: "exoplanet-atlas",
     title: "What kind of exoplanets did we learn to see?",
+    kind: "story",
     meta: "Interactive data story · D3.js",
     body: [
       "NASA Exoplanet Archive data visualized with D3: discovery waves, detection methods, and an interactive map of planet radius against host-star temperature.",
@@ -43,6 +67,7 @@ export const writing: Entry[] = [
   {
     slug: "exoplanet-kepler-story",
     title: "How Kepler changed our view of small worlds",
+    kind: "story",
     meta: "Interactive data story · D3.js",
     body: [
       "A data story on how Kepler turned small planets from rare detections into a measurable population, with era comparisons, method mix, and radius-band visualizations.",
@@ -52,6 +77,7 @@ export const writing: Entry[] = [
   {
     slug: "live-your-life-at-full-power",
     title: "Live your life at full power",
+    kind: "essay",
     meta: "Essay · on Medium",
     body: [
       "On operating at full capacity: not just in work, but in presence, attention, and the everyday moments that compound into a life.",
@@ -65,6 +91,7 @@ export const writing: Entry[] = [
   {
     slug: "refactor-a-forge-to-the-structure",
     title: "Refactor: a forge to the structure",
+    kind: "essay",
     meta: "Essay · on Medium",
     body: [
       "What the discipline of code refactoring teaches about confronting complexity, and why restructuring what already exists is often the most creative act.",
@@ -78,6 +105,7 @@ export const writing: Entry[] = [
   {
     slug: "market-research-guest-lecture",
     title: "Market research guest lecture",
+    kind: "essay",
     meta: "Notes · on Medium",
     body: [
       "Notes and synthesis from a guest lecture on how market research actually operates: beyond surveys and into the architecture of real decisions.",
@@ -91,6 +119,7 @@ export const writing: Entry[] = [
   {
     slug: "achieving-goals-through-pitch",
     title: "Achieving goals through pitch",
+    kind: "essay",
     meta: "Essay · on Medium",
     body: [
       "How framing a goal as a pitch, to yourself and to others, sharpens both the objective and the path toward it.",
@@ -107,6 +136,7 @@ export const interests: Entry[] = [
   {
     slug: "software",
     title: "Software & digital products",
+    kind: "build",
     meta: "What I build, and why",
     body: [
       "I find fulfillment in making someone&rsquo;s day easier and better. Sometimes that happens through products and technology, and a few of those are live on the internet:",
@@ -142,6 +172,7 @@ export const interests: Entry[] = [
   {
     slug: "remote-sensing",
     title: "Remote sensing",
+    kind: "research",
     meta: "Thesis research",
     body: [
       "My thesis is a multi-scenario pipeline that compares super-resolution methods (bicubic, SRCNN) and feature sets built from spectral indices to predict water quality parameters (TSS, TDS, and DO) from Sentinel-2 imagery over Jakarta&rsquo;s rivers.",
@@ -156,6 +187,7 @@ export const interests: Entry[] = [
   {
     slug: "student-organizations",
     title: "Student-led organizations",
+    kind: "community",
     meta: "BEM Fasilkom UI",
     body: [
       "Often, making someone&rsquo;s day easier happens through communities. At BEM Fasilkom UI the work was student governance and advocacy: extending wellbeing systems, collaborative infrastructure, and campus life that works for everyone.",
@@ -169,6 +201,7 @@ export const interests: Entry[] = [
   {
     slug: "astronomy",
     title: "Astronomy",
+    kind: "research",
     meta: "Learning the universe from public data",
     body: [
       "I explore stars, exoplanets, gas giants, and related systems through reliable public astronomy resources and datasets. So far that has become two data stories on the NASA Exoplanet Archive: <a href=\"/blog/exoplanet-atlas\">what kinds of exoplanets we learned to see</a>, and <a href=\"/blog/exoplanet-kepler-story\">how Kepler changed our view of small worlds</a>.",
