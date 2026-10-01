@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Entry } from "@/lib/content";
 
@@ -43,6 +44,42 @@ export function MasterDetail({
         {active.body.map((p, idx) => (
           <p key={idx} dangerouslySetInnerHTML={{ __html: p }} />
         ))}
+        {active.images && (
+          <div className="shots">
+            {active.images.map((img) => (
+              <a
+                key={img.src}
+                href={img.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={img.alt}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={img.width}
+                  height={img.height}
+                  sizes="(max-width: 820px) 70vw, 220px"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+        {active.link &&
+          (active.link.external ? (
+            <a
+              className="btn g cta"
+              href={active.link.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {active.link.label}
+            </a>
+          ) : (
+            <Link className="btn g cta" href={active.link.href}>
+              {active.link.label}
+            </Link>
+          ))}
         <div className="pn">
           {prev && (
             <Link className="btn" href={`${basePath}/${prev.slug}`}>

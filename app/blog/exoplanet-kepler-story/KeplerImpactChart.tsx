@@ -256,7 +256,7 @@ function buildStoryData(data: Exoplanet[]): StoryData {
 
 function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <div className="metric-card glass-card">
+    <div className="metric-card sheet">
       <p className="card-kicker">{label}</p>
       <strong>{value}</strong>
       <span>{detail}</span>
@@ -269,7 +269,7 @@ function StoryMetrics({ story }: { story: StoryData }) {
   const keplerEra = story.eras.find((era) => era.id === "kepler");
 
   return (
-    <section className="container-swiss metric-grid" aria-label="Small exoplanet dataset summary">
+    <section className="metric-grid" aria-label="Small exoplanet dataset summary">
       <MetricCard
         label="Small planets"
         value={numberFormat.format(story.smallCount)}
@@ -346,8 +346,8 @@ function CumulativeSmallWorldsChart({ story }: { story: StoryData }) {
   const keplerWidth = x(Math.min(KEPLER_END, story.latestYear)) - keplerX;
 
   return (
-    <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+    <section className="viz-section">
+      <div className="viz-card sheet">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 1</p>
@@ -737,8 +737,8 @@ function EraComparisonSection({ story }: { story: StoryData }) {
   const keplerTopFacility = keplerEra?.topFacilities[0];
 
   return (
-    <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+    <section className="viz-section">
+      <div className="viz-card sheet">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 2</p>
@@ -799,8 +799,8 @@ function RadiusDistributionSection({ story }: { story: StoryData }) {
   const largestBin = d3.greatest(story.radiusBins, (bin) => bin.count);
 
   return (
-    <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+    <section className="viz-section">
+      <div className="viz-card sheet">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 3</p>
@@ -926,8 +926,8 @@ export function KeplerImpactChart() {
 
   if (status === "loading") {
     return (
-      <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+      <section className="viz-section">
+        <div className="viz-card sheet">
           <p className="card-kicker">Loading Kepler data story</p>
           <div className="viz-loading" />
         </div>
@@ -937,8 +937,8 @@ export function KeplerImpactChart() {
 
   if (status === "error" || !story) {
     return (
-      <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+      <section className="viz-section">
+        <div className="viz-card sheet">
           <p className="card-kicker">Dataset unavailable</p>
           <p className="card-muted">The local exoplanet CSV could not be loaded.</p>
         </div>

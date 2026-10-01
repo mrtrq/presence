@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 export default function KeplerImpactPage() {
   return (
     <article className="article-shell">
-      <header className="article-hero container-swiss">
-        <Link href="/blog" className="article-back">
-          Back to blog
+      <header className="article-hero">
+        <Link href="/writing" className="article-back">
+          Back to writing
         </Link>
         <p className="article-kicker">Data story</p>
         <h1>How Kepler Changed Our View of Small Worlds</h1>
@@ -25,8 +25,8 @@ export default function KeplerImpactPage() {
         </p>
       </header>
 
-      <div className="container-swiss article-grid">
-        <aside className="article-side glass-card">
+      <div className="article-grid">
+        <aside className="article-side sheet">
           <p className="card-kicker">About the data</p>
           <p>
             The charts below use the local NASA Exoplanet Archive composite-parameters CSV included
@@ -65,8 +65,8 @@ export default function KeplerImpactPage() {
 
       <KeplerImpactChart />
 
-      <section className="container-swiss article-grid">
-        <aside className="article-side glass-card">
+      <section className="article-grid">
+        <aside className="article-side sheet">
           <p className="card-kicker">Reading the charts</p>
           <p>
             Treat the annual bars as publication history and the cumulative curve as the deeper

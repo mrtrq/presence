@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Star, Squiggle } from "@/components/Doodles";
 import { writing } from "@/lib/content";
@@ -9,12 +10,12 @@ export default function HomePage() {
     <section className="view home">
       <div>
         <h1>
-          I&apos;m Tarreq. I write software and work through questions about
-          the universe.
+          I&apos;m Tarreq, navigating forward as I learn and unlearn.
         </h1>
         <p className="lede">
-          This is where I keep my essays, the things I&apos;m curious about,
-          and what I&apos;m building. Start with whatever looks interesting.
+          Computer science graduate from the University of Indonesia, software
+          engineer at BDO Indonesia. This is where I keep my writing, what I&apos;m
+          curious about, and what I&apos;ve built.
         </p>
         <div className="row">
           <Link className="btn y" href="/writing">
@@ -32,14 +33,20 @@ export default function HomePage() {
         <Squiggle className="dd" style={{ bottom: "2%", left: "14%" }} />
 
         <figure className="card photo" style={{ margin: 0 }}>
-          <div className="ph">Your photo goes here</div>
+          <Image
+            src="/avatar.jpg"
+            alt="Tarreq standing in front of the Faculty of Computer Science building"
+            width={960}
+            height={1080}
+            sizes="220px"
+          />
         </figure>
 
         <article className="card now on-y">
           <h3>Right now</h3>
           <p>
-            Placeholder: what you&apos;re building, reading, or learning this
-            month.
+            Working as a software engineer, and reading the sky through
+            exoplanet data.
           </p>
         </article>
 
