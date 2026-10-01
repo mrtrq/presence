@@ -13,36 +13,26 @@ export default function AboutPage() {
   return (
     <section className="view about">
       <article className="reader">
-        <h2>Hi, I&apos;m Tarreq.</h2>
-        <div className="meta">{profile.name}</div>
+        <h2>Hi! I&apos;m Tarreq.</h2>
 
         <p>
-          I&apos;m a computer science graduate from the University of Indonesia,
-          and I work as a software engineer at BDO Indonesia.
+         I'm a software engineer currently working at BDO in Indonesia. 
         </p>
         <p>
-          I find fulfillment in making someone&apos;s day easier and better.
-          Sometimes that happens through products and technology, and often it
-          happens through communities and student organizations.
+          
         </p>
         <p>
-          I&apos;m interested in research on remote sensing, digital products,
-          and student-led organizations. Each has taught me to listen carefully,
-          learn from different people, and turn uncertainties into
-          probabilities.
+          This website contains a fraction of my writings, experiences, and interests.
         </p>
         <p>
-          I&apos;m still navigating forward by learning and unlearning, and I&apos;m
-          excited to keep making this world a better place, with approaches that
-          rekindle the light in every challenge.
+          I believe that navigating forward by learning and unlearning is the way to go.
         </p>
 
         <hr />
 
-        <h3>Say hello</h3>
+        <h3>Reach me out and let's create something with purpose</h3>
         <p>
-          I&apos;m all ears for thoughtful discussions, collaborations, and
-          experiments.
+          
         </p>
         <div className="row">
           <a className="btn y" href={`mailto:${profile.email}`}>
