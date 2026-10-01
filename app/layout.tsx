@@ -1,32 +1,53 @@
-import { Footer } from './components/Footer';
-import { Navbar } from './components/Navbar';
-import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from "next";
+import { Fraunces, Karla } from "next/font/google";
+import { SiteNav } from "./components/SiteNav";
+import { SiteFooter } from "./components/SiteFooter";
+import { identity } from "./content";
+import "./globals.css";
+
+const display = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-fraunces",
+  axes: ["SOFT", "WONK", "opsz"],
+});
+
+const body = Karla({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-karla",
+});
 
 export const metadata: Metadata = {
-  title: 'Muhammad Tarreq',
-  description: 'Navigating Through',
-  icons: {
-    icon: '/favicon.svg'
+  metadataBase: new URL("https://example.com"),
+  title: {
+    default: `${identity.name} — ${identity.role}`,
+    template: `%s · ${identity.name}`,
   },
-  keywords: [
-    'Muhammad Tarreq',
-    'Tarreq Maulana',
-    'BEM Fasilkom UI',
-  ]
-}
+  description: identity.tagline,
+  openGraph: {
+    title: `${identity.name} — ${identity.role}`,
+    description: identity.tagline,
+    type: "website",
+  },
+  icons: { icon: "/favicon.svg" },
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const viewport: Viewport = {
+  themeColor: "#fbf4e4",
+  colorScheme: "light",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen antialiased flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <body>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <SiteNav />
+        <main id="main">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );
