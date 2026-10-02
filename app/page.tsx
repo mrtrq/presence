@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star, Squiggle } from "@/components/Doodles";
 import { books } from "@/lib/books";
+import { books } from "@/lib/books";
 
 export default function HomePage() {
+  const latest = books.find((b) => b.status === "read");
   const latest = books.find((b) => b.status === "read");
 
   return (
@@ -21,6 +23,8 @@ export default function HomePage() {
           <Link className="btn y" href="/books">
             Browse my bookshelf
           </Link>
+          <Link className="btn" href="/contact">
+            Get in touch
           <Link className="btn" href="/contact">
             Get in touch
           </Link>
@@ -50,6 +54,18 @@ export default function HomePage() {
           </p>
         </article>
 
+        {latest && (
+          <Link className="card late on-s" href="/books">
+            <h3>Last read</h3>
+            <b>
+              {latest.title} · {latest.author}
+            </b>
+            <span className="more">
+              See the shelf
+              <ArrowRight strokeWidth={2.8} aria-hidden="true" />
+            </span>
+          </Link>
+        )}
         {latest && (
           <Link className="card late on-s" href="/books">
             <h3>Last read</h3>
