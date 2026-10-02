@@ -1,6 +1,15 @@
-import { redirect } from "next/navigation";
-import { interests } from "@/lib/content";
+import { MasterDetail } from "@/components/MasterDetail";
+import { interests, interestKinds } from "@/lib/content";
 
 export default function InterestsIndex() {
-  redirect(`/interests/${interests[0].slug}`);
+  return (
+    <MasterDetail
+      label="Interests"
+      basePath="/interests"
+      entries={interests}
+      kinds={interestKinds}
+      activeSlug={interests[0].slug}
+      mode="index"
+    />
+  );
 }

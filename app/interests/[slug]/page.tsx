@@ -21,6 +21,7 @@ export default async function InterestsEntry({
       entries={interests}
       kinds={interestKinds}
       activeSlug={slug}
+      mode="entry"
     />
   );
 }

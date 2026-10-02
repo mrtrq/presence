@@ -21,6 +21,7 @@ export default async function WritingEntry({
       entries={writing}
       kinds={writingKinds}
       activeSlug={slug}
+      mode="entry"
     />
   );
 }

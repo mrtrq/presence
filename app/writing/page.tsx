@@ -1,6 +1,15 @@
-import { redirect } from "next/navigation";
-import { writing } from "@/lib/content";
+import { MasterDetail } from "@/components/MasterDetail";
+import { writing, writingKinds } from "@/lib/content";
 
 export default function WritingIndex() {
-  redirect(`/writing/${writing[0].slug}`);
+  return (
+    <MasterDetail
+      label="Writing"
+      basePath="/writing"
+      entries={writing}
+      kinds={writingKinds}
+      activeSlug={writing[0].slug}
+      mode="index"
+    />
+  );
 }

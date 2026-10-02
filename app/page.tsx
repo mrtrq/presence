@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Star, Squiggle } from "@/components/Doodles";
@@ -42,7 +43,7 @@ export default function HomePage() {
           />
         </figure>
 
-        <article className="card now on-y">
+        <article className="card now note on-y">
           <h3>Right now</h3>
           <p>
             Working as a software engineer, and reading the sky through
@@ -53,15 +54,9 @@ export default function HomePage() {
         <Link className="card late on-s" href={`/writing/${latest.slug}`}>
           <h3>Latest essay</h3>
           <b>{latest.title}</b>
-          <span
-            className="btn"
-            style={{
-              display: "inline-block",
-              padding: ".35em .8em",
-              boxShadow: "2px 2px 0 var(--sh)",
-            }}
-          >
+          <span className="more">
             Read it
+            <ArrowRight strokeWidth={2.8} aria-hidden="true" />
           </span>
         </Link>
       </div>
