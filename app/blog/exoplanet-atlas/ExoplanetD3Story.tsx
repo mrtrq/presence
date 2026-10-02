@@ -136,7 +136,7 @@ function buildYearRows(data: Exoplanet[]) {
 
 function MetricCard({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <div className="metric-card glass-card">
+    <div className="metric-card sheet">
       <p className="card-kicker">{label}</p>
       <strong>{value}</strong>
       <span>{detail}</span>
@@ -189,8 +189,8 @@ function DiscoveryTimeline({ data }: { data: Exoplanet[] }) {
   const yTicks = y.ticks(4);
 
   return (
-    <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+    <section className="viz-section">
+      <div className="viz-card sheet">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 1</p>
@@ -384,8 +384,8 @@ function PlanetMap({ data }: { data: Exoplanet[] }) {
   const yAxisLabelX = width < 560 ? 30 : 18;
 
   return (
-    <section className="container-swiss viz-section">
-      <div className="viz-card glass-card">
+    <section className="viz-section">
+      <div className="viz-card sheet">
         <div className="viz-header">
           <div>
             <p className="card-kicker">Visualization 2</p>
@@ -620,8 +620,8 @@ export function ExoplanetD3Story() {
 
   if (status === "loading") {
     return (
-      <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+      <section className="viz-section">
+        <div className="viz-card sheet">
           <p className="card-kicker">Loading D3 story</p>
           <div className="viz-loading" />
         </div>
@@ -631,8 +631,8 @@ export function ExoplanetD3Story() {
 
   if (status === "error") {
     return (
-      <section className="container-swiss viz-section">
-        <div className="viz-card glass-card">
+      <section className="viz-section">
+        <div className="viz-card sheet">
           <p className="card-kicker">Dataset unavailable</p>
           <p className="card-muted">The local exoplanet CSV could not be loaded.</p>
         </div>
@@ -643,7 +643,7 @@ export function ExoplanetD3Story() {
   return (
     <>
       {summary ? (
-        <section className="container-swiss metric-grid" aria-label="Exoplanet dataset summary">
+        <section className="metric-grid" aria-label="Exoplanet dataset summary">
           <MetricCard
             label="Planets"
             value={numberFormat.format(data.length)}

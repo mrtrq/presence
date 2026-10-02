@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 export default function ExoplanetAtlasPage() {
   return (
     <article className="article-shell">
-      <header className="article-hero container-swiss">
-        <Link href="/blog" className="article-back">
-          Back to blog
+      <header className="article-hero">
+        <Link href="/writing" className="article-back">
+          Back to writing
         </Link>
         <p className="article-kicker">D3.js data story</p>
         <h1>What kind of exoplanets did we learn to see?</h1>
@@ -23,8 +23,8 @@ export default function ExoplanetAtlasPage() {
         </p>
       </header>
 
-      <div className="container-swiss article-grid">
-        <aside className="article-side glass-card">
+      <div className="article-grid">
+        <aside className="article-side sheet">
           <p className="card-kicker">Dataset</p>
           <p>
             5,978 confirmed planets from the NASA Exoplanet Archive composite parameters table,
@@ -54,8 +54,8 @@ export default function ExoplanetAtlasPage() {
 
       <ExoplanetD3Story />
 
-      <section className="container-swiss article-grid">
-        <aside className="article-side glass-card">
+      <section className="article-grid">
+        <aside className="article-side sheet">
           <p className="card-kicker">Why D3 here?</p>
           <p>
             D3 is not a chart template. It is a toolbox for scales, shapes, layouts, parsing,
@@ -66,21 +66,21 @@ export default function ExoplanetAtlasPage() {
         <section className="article-copy">
           <h2>D3 compared with other tools</h2>
           <div className="comparison-grid">
-            <div className="glass-card comparison-card">
+            <div className="sheet comparison-card">
               <h3>Spreadsheet chart</h3>
               <p>
                 Fast for a quick answer, but awkward for log axes, dense hover targets, and
                 custom explanatory layout.
               </p>
             </div>
-            <div className="glass-card comparison-card">
+            <div className="sheet comparison-card">
               <h3>Dashboard library</h3>
               <p>
                 Great defaults and less code, but the visual design tends to follow the library's
                 available chart types.
               </p>
             </div>
-            <div className="glass-card comparison-card comparison-card-active">
+            <div className="sheet comparison-card comparison-card-active">
               <h3>D3</h3>
               <p>
                 More deliberate code, but every encoding is yours: stacked areas, log scales,

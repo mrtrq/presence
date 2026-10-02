@@ -1,32 +1,35 @@
-import { Footer } from './components/Footer';
-import { Navbar } from './components/Navbar';
-import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import "@fontsource/bricolage-grotesque/latin-500.css";
+import "@fontsource/bricolage-grotesque/latin-800.css";
+import "@fontsource/newsreader/latin-400.css";
+import "@fontsource/newsreader/latin-400-italic.css";
+import "@fontsource/newsreader/latin-600.css";
+import { Brand, Dock } from "@/components/Nav";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Muhammad Tarreq',
-  description: 'Navigating Through',
+  title: "Tarreq",
+  description:
+    "Tarreq's essays, interests, and projects — software and questions about the universe.",
   icons: {
-    icon: '/favicon.svg'
+    icon: "/favicon.svg",
   },
-  keywords: [
-    'Muhammad Tarreq',
-    'Tarreq Maulana',
-    'BEM Fasilkom UI',
-  ]
-}
+  keywords: ["Muhammad Tarreq", "Tarreq Maulana"],
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen antialiased flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body>
+        <div className="app">
+          <Brand />
+          <main className="stage">{children}</main>
+          <Dock />
+        </div>
       </body>
     </html>
   );
