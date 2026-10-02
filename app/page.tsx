@@ -2,10 +2,10 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Star, Squiggle } from "@/components/Doodles";
-import { writing } from "@/lib/content";
+import { books } from "@/lib/books";
 
 export default function HomePage() {
-  const latest = writing[0];
+  const latest = books.find((b) => b.status === "read");
 
   return (
     <section className="view home">
@@ -19,11 +19,11 @@ export default function HomePage() {
           curious about, and what I&apos;ve built.
         </p>
         <div className="row">
-          <Link className="btn y" href="/writing">
-            Read the writing
+          <Link className="btn y" href="/books">
+            Browse the bookshelf
           </Link>
-          <Link className="btn" href="/interests">
-            See what I&apos;m into
+          <Link className="btn" href="/contact">
+            Get in touch
           </Link>
         </div>
       </div>
@@ -51,14 +51,18 @@ export default function HomePage() {
           </p>
         </article>
 
-        <Link className="card late on-s" href={`/writing/${latest.slug}`}>
-          <h3>Latest essay</h3>
-          <b>{latest.title}</b>
-          <span className="more">
-            Read it
-            <ArrowRight strokeWidth={2.8} aria-hidden="true" />
-          </span>
-        </Link>
+        {latest && (
+          <Link className="card late on-s" href="/books">
+            <h3>Last read</h3>
+            <b>
+              {latest.title} · {latest.author}
+            </b>
+            <span className="more">
+              See the shelf
+              <ArrowRight strokeWidth={2.8} aria-hidden="true" />
+            </span>
+          </Link>
+        )}
       </div>
     </section>
   );

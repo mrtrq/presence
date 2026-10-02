@@ -22,17 +22,8 @@ export type Book = {
 };
 
 export const books: Book[] = [
-  { title: "Cosmos", author: "Carl Sagan", status: "read", year: 2024 },
-  { title: "Pale Blue Dot", author: "Carl Sagan", status: "read", year: 2024 },
-  { title: "Atomic Habits", author: "James Clear", status: "read", year: 2023 },
-  { title: "Deep Work", author: "Cal Newport", status: "read", year: 2023 },
-  { title: "The Pragmatic Programmer", author: "David Thomas & Andrew Hunt", status: "read", year: 2022 },
-  { title: "Sapiens", author: "Yuval Noah Harari", status: "read", year: 2022 },
-  { title: "Clean Code", author: "Robert C. Martin", status: "read", year: 2021 },
+  { title: "Our Mathematical Universe", author: "Max Tegmark", status: "read", year: 2019 },
+  { title: "Things to Make and Do in The 4th Dimension", author: "Matt Parker", status: "read", year: 2019 },
   { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", year: 2021 },
-  { title: "Designing Data-Intensive Applications", author: "Martin Kleppmann", status: "want" },
-  { title: "A Brief History of Time", author: "Stephen Hawking", status: "want" },
-  { title: "The Design of Everyday Things", author: "Don Norman", status: "want" },
-  { title: "Thinking, Fast and Slow", author: "Daniel Kahneman", status: "want" },
   { title: "Project Hail Mary", author: "Andy Weir", status: "want" },
 ];
