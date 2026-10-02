@@ -5,12 +5,12 @@ import { Squiggle, Star } from "@/components/Doodles";
 import { profile } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "About · Tarreq",
+  title: "Contact · Tarreq",
   description:
     "Muhammad Tarreq is a computer science graduate from the University of Indonesia and a software engineer interested in remote sensing, digital products, and student-led organizations.",
 };
 
-export default function AboutPage() {
+export default function ContactPage() {
   return (
     <section className="view about">
       <article className="reader">

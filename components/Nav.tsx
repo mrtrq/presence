@@ -6,10 +6,8 @@ import { Planet } from "./Doodles";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/writing", label: "Writing" },
-  { href: "/interests", label: "Interests" },
   { href: "/books", label: "Books" },
-  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 function sectionOf(pathname: string) {
