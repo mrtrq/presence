@@ -1187,3 +1187,77 @@ h1 {
     font-size: 0.74rem;
   }
 }
+
+/* contact: reasons to write, then the quick ways to do it */
+.reader.contact {
+  display: flex;
+  flex-direction: column;
+}
+.reader.contact h2 {
+  max-width: 24ch;
+  font-size: clamp(1.5rem, 2.7vw, 2.15rem);
+}
+.reader.contact .meta {
+  margin-bottom: 1.3em;
+}
+.about .reader.contact > .topics {
+  max-width: none;
+}
+.topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+.topic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65em;
+  padding: 14px 15px 16px;
+  border: 2px solid var(--ink);
+  border-radius: var(--rad);
+  box-shadow: 4px 4px 0 var(--sh);
+  background: var(--bg);
+  color: var(--ink);
+}
+.topic:nth-child(odd) {
+  transform: rotate(-0.7deg);
+}
+.topic:nth-child(even) {
+  transform: rotate(0.6deg);
+}
+.topic.t-y {
+  background: var(--y);
+  color: var(--on);
+}
+.topic.t-s {
+  background: var(--s);
+  color: var(--on);
+}
+.reader .topic h3 {
+  margin: 0;
+}
+.reader .topic p {
+  flex: 1;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.reader.contact .contact-links {
+  margin-top: 1.7em;
+}
+@media (max-width: 820px) {
+  /* on a phone the address and copy button come straight after the heading */
+  .reader.contact > h2,
+  .reader.contact > .meta {
+    order: -2;
+  }
+  .reader.contact > .contact-links {
+    order: -1;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+  }
+}
