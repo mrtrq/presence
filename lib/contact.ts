@@ -8,7 +8,7 @@ export type Topic = {
 };
 
 // One card per reason to write. Edit the words here; the Contact page picks
-// them up. Keep the list to three so the page fits without scrolling.
+// them up. Two or three cards fit without scrolling.
 export const topics: Topic[] = [
   {
     id: "build",
@@ -17,14 +17,6 @@ export const topics: Topic[] = [
       "Software and digital products: a rough idea, a prototype, or a team that needs another builder.",
     subject: "Building something together",
     tone: "y",
-  },
-  {
-    id: "sky",
-    title: "Study the sky",
-    blurb:
-      "Exoplanets, remote sensing, and the data behind them. Questions, papers, and possible projects.",
-    subject: "Exoplanets and remote sensing",
-    tone: "s",
   },
   {
     id: "books",

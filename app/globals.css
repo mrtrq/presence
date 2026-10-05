@@ -1261,3 +1261,11 @@ h1 {
     margin-bottom: 1.5em;
   }
 }
+
+/* Desktop: more room between the site and the left and right screen edges.
+   Phones and tablets (820px and narrower) keep their existing margins. */
+@media (min-width: 821px) {
+  .app {
+    padding-inline: clamp(40px, 7vw, 112px);
+  }
+}
