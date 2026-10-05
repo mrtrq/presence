@@ -22,8 +22,13 @@ export type Book = {
 };
 
 export const books: Book[] = [
-  { title: "Our Mathematical Universe", author: "Max Tegmark", status: "read", year: 2019 },
-  { title: "Things to Make and Do in The 4th Dimension", author: "Matt Parker", status: "read", year: 2019 },
-  { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", year: 2021 },
+  { title: "Our Mathematical Universe", author: "Max Tegmark", status: "read"},
+  { title: "Things to Make and Do in The 4th Dimension", author: "Matt Parker", status: "read"},
+  { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read"},
+  { title: "Famous Five", author: "Enid Blyton", status: "read"},
+  { title: "The Elegant Universe", author: "Brian Greene", status: "read"},
+  { title: "The Adventures of Tintin", author: "Hergé", status: "read"},
   { title: "Project Hail Mary", author: "Andy Weir", status: "want" },
+  { title: "Bird by Bird", author: "Anne Lamott ", status: "want" },
+  { title: "The Beauty of Falling", author: "Claudia de Rham ", status: "want" },
 ];
