@@ -1262,6 +1262,15 @@ h1 {
   }
 }
 
+/* Contact fits on one screen, so it shows no scrollbar. On a very short
+   window it can still be scrolled with the wheel or by touch. */
+.view.quiet {
+  scrollbar-width: none;
+}
+.view.quiet::-webkit-scrollbar {
+  display: none;
+}
+
 /* Desktop: more room between the site and the left and right screen edges.
    Phones and tablets (820px and narrower) keep their existing margins. */
 @media (min-width: 821px) {

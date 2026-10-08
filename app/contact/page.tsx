@@ -13,12 +13,11 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="view about">
+    <section className="view about quiet">
       <article className="reader contact">
         <h2>Reach me out and let&apos;s create something with purpose</h2>
         <p className="meta">
-          Pick the closest topic and your email app opens with the subject
-          filled in.
+          Whatever the reason, write to me at the address below.
         </p>
 
         <ul className="topics">
@@ -26,12 +25,6 @@ export default function ContactPage() {
             <li key={t.id} className={`topic t-${t.tone}`}>
               <h3>{t.title}</h3>
               <p>{t.blurb}</p>
-              <a
-                className="btn"
-                href={`mailto:${profile.email}?subject=${encodeURIComponent(t.subject)}`}
-              >
-                Email me
-              </a>
             </li>
           ))}
         </ul>
