@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { CopyEmail } from "@/components/CopyEmail";
+import { Eridian } from "@/components/Eridian";
 import { Squiggle, Star } from "@/components/Doodles";
 import { profile } from "@/lib/content";
 import { topics } from "@/lib/contact";
@@ -57,6 +58,7 @@ export default function ContactPage() {
           </div>
           <figcaption>the milky way</figcaption>
         </figure>
+        <Eridian />
       </aside>
     </section>
   );

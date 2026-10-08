@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, Squiggle } from "@/components/Doodles";
+import { Gargantua, Star, Squiggle } from "@/components/Doodles";
 import { books } from "@/lib/books";
 
 export default function HomePage() {
@@ -29,6 +29,8 @@ export default function HomePage() {
 
       <div className="fl">
         <div className="blob" />
+        {/* in Space mode the blob gives way to Gargantua */}
+        <Gargantua className="bh" />
         <Star className="dd" style={{ top: "6%", left: "46%" }} />
         <Squiggle className="dd" style={{ bottom: "2%", left: "14%" }} />
 
