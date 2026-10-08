@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CopyEmail } from "@/components/CopyEmail";
 import { Squiggle, Star } from "@/components/Doodles";
 import { profile } from "@/lib/content";
+import { topics } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Contact · Tarreq",
@@ -12,30 +13,23 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="view about">
-      <article className="reader">
-        <h2>Hi! I&apos;m Tarreq.</h2>
-
-        <p>
-         I'm a software engineer currently working at BDO in Indonesia. 
-        </p>
-        <p>
-          
-        </p>
-        <p>
-          This website contains a fraction of my writings, experiences, and interests.
-        </p>
-        <p>
-          I believe that navigating forward by learning and unlearning is the way to go.
+    <section className="view about quiet">
+      <article className="reader contact">
+        <h2>Reach me out </h2>
+        <p className="meta">
+          and let&apos;s create something with purpose
         </p>
 
-        <hr />
+        <ul className="topics">
+          {topics.map((t) => (
+            <li key={t.id} className={`topic t-${t.tone}`}>
+              <h3>{t.title}</h3>
+              <p>{t.blurb}</p>
+            </li>
+          ))}
+        </ul>
 
-        <h3>Reach me out and let's create something with purpose</h3>
-        <p>
-          
-        </p>
-        <div className="row">
+        <div className="row contact-links">
           <CopyEmail email={profile.email} />
           <a className="btn" href={profile.github} target="_blank" rel="noreferrer">
             GitHub
