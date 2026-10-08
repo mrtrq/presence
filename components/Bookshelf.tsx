@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { Book } from "@/lib/books";
 
 const tones = ["y", "s", "g", "p", "k"] as const;
@@ -23,6 +23,42 @@ function spine(book: Book) {
   };
 }
 
+/*
+ * The tesseract: Murph's bookshelf from Interstellar. If the shelf sits
+ * untouched for a while, one spine taps out STAY in Morse code, the way Cooper
+ * pushed books from the other side. It happens once per visit, and never for
+ * visitors who ask for reduced motion.
+ */
+const MORSE: Record<string, string> = { S: "...", T: "-", A: ".-", Y: "-.--" };
+const GHOST_WORD = "STAY";
+const IDLE_MS = 9000;
+
+function morseFrames(word: string, unit = 150, lift = 11) {
+  const steps: { up: boolean; units: number }[] = [];
+  for (const letter of word) {
+    for (const sym of MORSE[letter]) {
+      steps.push({ up: true, units: sym === "." ? 1 : 3 });
+      steps.push({ up: false, units: 1 });
+    }
+    steps.push({ up: false, units: 2 }); // letter gap is three units in all
+  }
+  const total = steps.reduce((n, s) => n + s.units, 0) * unit;
+  const ramp = 45 / total;
+  const frames: Keyframe[] = [{ offset: 0, transform: "translateY(0)" }];
+  let t = 0;
+  for (const s of steps) {
+    const end = t + (s.units * unit) / total;
+    if (s.up) {
+      frames.push({ offset: t + ramp, transform: `translateY(-${lift}px)` });
+      frames.push({ offset: end - ramp, transform: `translateY(-${lift}px)` });
+      frames.push({ offset: end, transform: "translateY(0)" });
+    }
+    t = end;
+  }
+  frames.push({ offset: 1, transform: "translateY(0)" });
+  return { frames, total };
+}
+
 const shelves = [
   { status: "read", label: "Read" },
   { status: "want", label: "Want to read" },
@@ -39,7 +75,42 @@ const shelves = [
 export function Bookshelf({ books }: { books: Book[] }) {
   const ordered = shelves.flatMap((s) => books.filter((b) => b.status === s.status));
   const [i, setI] = useState(0);
+  const [haunted, setHaunted] = useState(false);
+  const shelfRef = useRef<HTMLDivElement>(null);
   const active = ordered[i];
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let timer: number | undefined;
+    let anim: Animation | undefined;
+    const arm = () => {
+      anim?.cancel();
+      window.clearTimeout(timer);
+      timer = window.setTimeout(haunt, IDLE_MS);
+    };
+    const haunt = () => {
+      const spines = shelfRef.current?.querySelectorAll<HTMLElement>('.spine[aria-pressed="false"]');
+      if (!spines?.length || document.hidden) return arm();
+      const el = spines[Math.floor(Math.random() * spines.length)];
+      const { frames, total } = morseFrames(GHOST_WORD);
+      anim = el.animate(frames, { duration: total });
+      anim.onfinish = () => {
+        stop();
+        setHaunted(true);
+      };
+    };
+    const events = ["pointerdown", "keydown", "wheel", "touchstart"] as const;
+    const stop = () => {
+      window.clearTimeout(timer);
+      events.forEach((ev) => window.removeEventListener(ev, arm));
+    };
+    events.forEach((ev) => window.addEventListener(ev, arm, { passive: true }));
+    arm();
+    return () => {
+      stop();
+      anim?.cancel();
+    };
+  }, []);
 
   if (!active) {
     return (
@@ -79,7 +150,7 @@ export function Bookshelf({ books }: { books: Book[] }) {
         </span>
       </article>
 
-      <div className="shelves">
+      <div className="shelves" ref={shelfRef}>
         <h1 className="sr-only">Bookshelf</h1>
         {shelves.map((s) => {
           const onShelf = ordered
@@ -114,6 +185,12 @@ export function Bookshelf({ books }: { books: Book[] }) {
             </section>
           );
         })}
+        {haunted && (
+          <p className="ghost-note" role="status">
+            One of the books just tapped out <b className="morse" aria-hidden="true">··· − ·− −·−−</b> on
+            its own. That&apos;s Morse for <b>STAY</b>.
+          </p>
+        )}
       </div>
     </section>
   );

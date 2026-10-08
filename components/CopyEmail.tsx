@@ -38,6 +38,8 @@ export function CopyEmail({ email }: { email: string }) {
     try {
       await writeToClipboard(email);
       setStatus("copied");
+      // Rocky (Contact page) cheers, if he's around
+      window.dispatchEvent(new CustomEvent("rocky:say", { detail: "Fist my bump." }));
     } catch {
       setStatus("failed");
     }
