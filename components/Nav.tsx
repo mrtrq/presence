@@ -6,6 +6,7 @@ import { Planet } from "./Doodles";
 
 const links = [
   { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
   { href: "/books", label: "Books" },
   { href: "/contact", label: "Contact" },
 ];

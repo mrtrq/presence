@@ -1187,3 +1187,192 @@ h1 {
     font-size: 0.74rem;
   }
 }
+
+/* contact: reasons to write, then the quick ways to do it */
+.reader.contact {
+  display: flex;
+  flex-direction: column;
+}
+.reader.contact h2 {
+  max-width: 24ch;
+  font-size: clamp(1.5rem, 2.7vw, 2.15rem);
+}
+.reader.contact .meta {
+  margin-bottom: 1.3em;
+}
+.about .reader.contact > .topics {
+  max-width: none;
+}
+.topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+.topic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65em;
+  padding: 14px 15px 16px;
+  border: 2px solid var(--ink);
+  border-radius: var(--rad);
+  box-shadow: 4px 4px 0 var(--sh);
+  background: var(--bg);
+  color: var(--ink);
+}
+.topic:nth-child(odd) {
+  transform: rotate(-0.7deg);
+}
+.topic:nth-child(even) {
+  transform: rotate(0.6deg);
+}
+.topic.t-y {
+  background: var(--y);
+  color: var(--on);
+}
+.topic.t-s {
+  background: var(--s);
+  color: var(--on);
+}
+.reader .topic h3 {
+  --hl: var(--y);
+  margin: 0 0 0 -0.2em;
+  padding: 0 0.3em;
+  /* a highlighter swipe across the lower half of the words */
+  background: linear-gradient(
+    transparent 36%,
+    var(--hl) 36% 92%,
+    transparent 92%
+  );
+  border-radius: 0.25em 0.6em 0.3em 0.55em;
+  transform: rotate(-1deg);
+}
+.topic:nth-child(even) h3 {
+  --hl: var(--s);
+}
+/* keep the swipe visible when a card is coloured */
+.topic.t-y h3 {
+  --hl: var(--paper);
+}
+.topic.t-s h3 {
+  --hl: var(--y);
+}
+.reader .topic p {
+  flex: 1;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.reader.contact .contact-links {
+  margin-top: 1.7em;
+}
+@media (max-width: 820px) {
+  /* on a phone the address and copy button come straight after the heading */
+  .reader.contact > h2,
+  .reader.contact > .meta {
+    order: -2;
+  }
+  .reader.contact > .contact-links {
+    order: -1;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+  }
+}
+
+/* Contact fits on one screen, so it shows no scrollbar. On a very short
+   window it can still be scrolled with the wheel or by touch. */
+.view.quiet,
+.view.books,
+.shelves,
+.book-card {
+  scrollbar-width: none;
+}
+.view.quiet::-webkit-scrollbar,
+.view.books::-webkit-scrollbar,
+.shelves::-webkit-scrollbar,
+.book-card::-webkit-scrollbar {
+  display: none;
+}
+
+/* Work (and the other list + reader pages): a slim hand-drawn scrollbar.
+   A soft rounded track holds a yellow thumb with the same ink outline as the
+   buttons; the thumb turns green while you drag it. */
+.md .list,
+.split .body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--y) transparent;
+}
+@supports selector(::-webkit-scrollbar) {
+  .md .list,
+  .split .body {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+  .md .list::-webkit-scrollbar,
+  .split .body::-webkit-scrollbar {
+    width: 14px;
+  }
+  .md .list::-webkit-scrollbar-track,
+  .split .body::-webkit-scrollbar-track {
+    margin: 4px 0;
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
+    border-radius: 999px;
+  }
+  .md .list::-webkit-scrollbar-thumb,
+  .split .body::-webkit-scrollbar-thumb {
+    background: var(--y);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+  }
+  .md .list::-webkit-scrollbar-thumb:hover,
+  .split .body::-webkit-scrollbar-thumb:hover {
+    background: var(--s);
+  }
+  .md .list::-webkit-scrollbar-thumb:active,
+  .split .body::-webkit-scrollbar-thumb:active {
+    background: var(--g);
+  }
+}
+
+/* Desktop: more room between the site and the left and right screen edges.
+   Phones and tablets (820px and narrower) keep their existing margins. */
+@media (min-width: 821px) {
+  .app {
+    padding-inline: clamp(40px, 7vw, 112px);
+  }
+}
+
+/* Short desktop windows (a 1080p screen at 125-150% scaling is only 590-690px
+   tall in CSS pixels): shrink the shelves, the open book and the Contact card
+   with the window height so Books and Contact fit without scrolling. */
+@media (min-width: 821px) {
+  .shelf {
+    --row: clamp(110px, calc((100dvh - 300px) / 2), 200px);
+  }
+  .cover {
+    width: clamp(90px, calc(0.6 * 100dvh - 210px), 150px);
+  }
+}
+@media (min-width: 821px) and (max-height: 680px) {
+  .spine {
+    padding-block: 12px;
+  }
+  .cover span {
+    font-size: 0.88rem;
+  }
+  .reader.contact {
+    padding-block: 20px;
+  }
+  .reader.contact .meta {
+    margin-bottom: 0.9em;
+  }
+  .reader.contact .contact-links {
+    margin-top: 1.1em;
+  }
+  .topic {
+    padding-block: 10px 12px;
+  }
+}

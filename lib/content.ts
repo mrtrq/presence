@@ -179,9 +179,8 @@ export const interests: Entry[] = [
       "It is the kind of work that has taught me to listen carefully and to turn uncertainties into probabilities.",
     ],
     link: {
-      label: "View the thesis slides",
-      href: "https://drive.google.com/file/d/1f0mQ08DmmCkrgantM24Aau_bQzDZN7Uo/view?usp=drive_link",
-      external: true,
+      label: "Read the thesis summary",
+      href: "/work/thesis",
     },
   },
   {
