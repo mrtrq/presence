@@ -1264,11 +1264,57 @@ h1 {
 
 /* Contact fits on one screen, so it shows no scrollbar. On a very short
    window it can still be scrolled with the wheel or by touch. */
-.view.quiet {
+.view.quiet,
+.view.books,
+.shelves,
+.book-card {
   scrollbar-width: none;
 }
-.view.quiet::-webkit-scrollbar {
+.view.quiet::-webkit-scrollbar,
+.view.books::-webkit-scrollbar,
+.shelves::-webkit-scrollbar,
+.book-card::-webkit-scrollbar {
   display: none;
+}
+
+/* Work (and the other list + reader pages): a slim hand-drawn scrollbar.
+   A soft rounded track holds a yellow thumb with the same ink outline as the
+   buttons; the thumb turns green while you drag it. */
+.md .list,
+.split .body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--y) transparent;
+}
+@supports selector(::-webkit-scrollbar) {
+  .md .list,
+  .split .body {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+  .md .list::-webkit-scrollbar,
+  .split .body::-webkit-scrollbar {
+    width: 14px;
+  }
+  .md .list::-webkit-scrollbar-track,
+  .split .body::-webkit-scrollbar-track {
+    margin: 4px 0;
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
+    border-radius: 999px;
+  }
+  .md .list::-webkit-scrollbar-thumb,
+  .split .body::-webkit-scrollbar-thumb {
+    background: var(--y);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+  }
+  .md .list::-webkit-scrollbar-thumb:hover,
+  .split .body::-webkit-scrollbar-thumb:hover {
+    background: var(--s);
+  }
+  .md .list::-webkit-scrollbar-thumb:active,
+  .split .body::-webkit-scrollbar-thumb:active {
+    background: var(--g);
+  }
 }
 
 /* Desktop: more room between the site and the left and right screen edges.
