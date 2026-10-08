@@ -1238,7 +1238,27 @@ h1 {
   color: var(--on);
 }
 .reader .topic h3 {
-  margin: 0;
+  --hl: var(--y);
+  margin: 0 0 0 -0.2em;
+  padding: 0 0.3em;
+  /* a highlighter swipe across the lower half of the words */
+  background: linear-gradient(
+    transparent 36%,
+    var(--hl) 36% 92%,
+    transparent 92%
+  );
+  border-radius: 0.25em 0.6em 0.3em 0.55em;
+  transform: rotate(-1deg);
+}
+.topic:nth-child(even) h3 {
+  --hl: var(--s);
+}
+/* keep the swipe visible when a card is coloured */
+.topic.t-y h3 {
+  --hl: var(--paper);
+}
+.topic.t-s h3 {
+  --hl: var(--y);
 }
 .reader .topic p {
   flex: 1;
