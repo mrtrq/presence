@@ -18,8 +18,8 @@ export default function HomePage() {
           engineer at BDO in Indonesia. I love to read books, especially when accompanied by a cup of tea. 
         </p>
         <div className="row">
-          <Link className="btn y" href="/books">
-            Browse my bookshelf
+          <Link className="btn y" href="/work">
+            Browse my works
           </Link>
           <Link className="btn" href="/contact">
             Get in touch

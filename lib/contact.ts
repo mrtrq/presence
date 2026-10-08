@@ -10,15 +10,15 @@ export type Topic = {
 export const topics: Topic[] = [
   {
     id: "build",
-    title: "Build something",
+    title: "Build & Research",
     blurb:
-      "Software and digital products: a rough idea, a prototype, or a team that needs another builder.",
-    tone: "y",
+      "Let's try to replicate experiments, do prototyping, or create a MVP",
+    tone: "c",
   },
   {
     id: "books",
-    title: "Swap book notes",
-    blurb: "Tell me what you're reading, or what I should read next.",
+    title: "Book Recommendations",
+    blurb: "Tell me one or two books that you think I should read",
     tone: "c",
   },
 ];

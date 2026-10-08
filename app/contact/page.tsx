@@ -15,9 +15,9 @@ export default function ContactPage() {
   return (
     <section className="view about quiet">
       <article className="reader contact">
-        <h2>Reach me out and let&apos;s create something with purpose</h2>
+        <h2>Reach me out </h2>
         <p className="meta">
-          Whatever the reason, write to me at the address below.
+          and let&apos;s create something with purpose
         </p>
 
         <ul className="topics">
